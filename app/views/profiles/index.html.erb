@@ -2,7 +2,7 @@
 <ul>
   <% @profiles.each do |profile| %>
     <li>
-    <%= link_to profile.user.first_name, profile_path(profile) %>
+    <%= link_to profile.user.first_name, profile_path(profile) %> <%= profile.skill_list %>
     <%= link_to profile_path(profile), method: :delete, data: { confirm: "Delete #{profile.user}?"} do %>
     <%= image_tag("https://img.icons8.com/carbon-copy/100/000000/delete-forever--v1.png", class: "small")  %>
     <% end %>
