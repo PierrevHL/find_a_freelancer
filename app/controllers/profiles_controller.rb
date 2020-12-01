@@ -1,6 +1,11 @@
 class ProfilesController < ApplicationController
   def index
-    @profiles = Profile.all
+    search_query = params[:query]
+    if search_query 
+      @profiles = Profile.where("location ILIKE '%#{search_query}%'")
+    else
+      @profiles = Profile.all
+    end
   end
 
   def show
