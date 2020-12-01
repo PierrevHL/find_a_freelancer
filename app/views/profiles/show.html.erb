@@ -4,6 +4,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 mx-auto">
+    <%= cl_image_tag @profile.image.key, height: 300, width: 400, crop: :fill %>
     <h2><%= @profile.description %></h2>
     <br>
     <p><%= @profile.location %></p>
@@ -11,9 +12,9 @@
     <p><%= @profile.rate %>$</p>
     <br>
     <br>
-    
+
     <%= link_to "Edit profile /", edit_profile_path(@profile) %>
-    
+
     <%= link_to "Back to list", profiles_path %>
     </div>
   </div>
