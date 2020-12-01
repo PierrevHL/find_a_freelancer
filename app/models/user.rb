@@ -6,5 +6,5 @@ class User < ApplicationRecord
   has_many :bookings
   has_one :profile
   has_many :conversations
-  validates :username, presence: true
+  validates :email, presence: true
 end
