@@ -6,6 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+require "open-uri"
+
+
+Booking.destroy_all
 Profile.destroy_all
 User.destroy_all
 
@@ -29,6 +33,11 @@ User.first(50).each do |user|
     description: Faker::Quote.famous_last_words,
     user_id: user.id
   )
+
+  keyword = ["worker", "person", "businessman"].sample
+  file = URI.open("https://source.unsplash.com/800x600/?#{keyword}")
+  profile.image.attach(io: file, filename: "#{profile.user.first_name}.jpg", content_type: 'image/png')
+
   profile.skill_list.add(skill.sample)
   profile.save!
 end
@@ -36,4 +45,14 @@ end
 Profile.first(20).each do |profile|
   profile.location_specific = true
   profile.save!
+end
+
+20.times do
+  start =  Date.today + rand(30..40)
+  Booking.create!(
+    start_date: start,
+    end_date: start + rand(2..3),
+    user: User.all.sample,
+    profile: Profile.all.sample,
+  )
 end

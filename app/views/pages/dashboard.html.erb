@@ -1,0 +1,12 @@
+<div class="container">
+  <h2>Dashboard</h2>
+    <% @bookings.each do |booking| %>
+    <div class="list_card m-4">
+      <%= cl_image_tag booking.profile.image.key %>
+      <div class="list_card-info">
+        <h2><%= booking.profile.user.first_name %></h2>
+        <p><strong>Dates</strong> <%= booking.start_date %> - <%= booking.end_date %> </p>
+      </div>
+    </div>
+  <% end %>
+</div>
