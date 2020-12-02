@@ -1,3 +1,4 @@
+<br>
 <div class="container">
   <div class="row">
     <div class="col-md-4">
@@ -11,6 +12,10 @@
       <h2><%= @profile.user.first_name.capitalize %></h2>
       <br>
       <h3><%= @profile.description %></h3>
+      <br>
+      <% @profile.skills.each do |skill| %>
+        <p><%= skill.name %></p>
+      <% end %>
       <br>
       <p><%= @profile.location %></p>
       <br>
@@ -27,10 +32,8 @@
     </div>
   </div>
 </div>
-
-<% @profile.skills.each do |skill| %>
-  <p><%= skill.name %></p>
-<% end %>
+<br>
+<br>
 <div class="container my-5">
   <div class="d-flex justify-content-around mx-5 px-5">
     <%= link_to "Edit profile", edit_profile_path(@profile), class: "btn btn-outline-secondary" %>
