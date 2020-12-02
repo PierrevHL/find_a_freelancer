@@ -28,8 +28,15 @@ class ProfilesController < ApplicationController
     @profile = Profile.new(profile_params)
     @user = current_user
     @profile.user = @user
-    @profile.save
-    redirect_to profile_path(@profile)
+    if @profile.save
+      params[:profile][:skills][1..-1].each do |skill|
+        @profile.skill_list.add(skill)
+      end
+      @profile.save
+      redirect_to profile_path(@profile)
+    else
+      render :new
+    end
   end
 
   private

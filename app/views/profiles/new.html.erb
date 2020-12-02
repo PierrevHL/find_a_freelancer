@@ -6,5 +6,6 @@
   <%= f.input :rate, label: "daily fee" %>
   <%= f.input :location_specific %>
   <%= f.input :image, as: :file %>
+  <%= f.input :skills, collection: Profile::SKILLS, input_html: { class: 'tags-selector', multiple: true } %>
   <%= f.submit %>
 <% end %>
