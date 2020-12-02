@@ -17,6 +17,7 @@ User.destroy_all
 puts "Database claned"
 
 skill = ["Photographer", "Programmer", "UX Designer", "Cleaner", "Plumber", "Electrical technician", "Tutor", "Translator", "Driver", "Gardener", "Model"]
+skill = Profile::SKILLS
 
 100.times do
   User.create!(
