@@ -1,12 +1,19 @@
 class ProfilesController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
+
   def index
     search_query = params[:query]
-    if search_query
-      @profiles = Profile.where("location ILIKE '%#{search_query}%'")
+
+    if params[:search]
+      dates = params[:search][:starts_at].split("to").map(&:strip).map(&:to_date)
+      @profiles = Profile.geocoded.select { |profile| profile.available_on?(dates[0], dates[1]) }
+    elsif search_query
+      @profiles = Profile.where("location ILIKE '%#{search_query}%'").geocoded
     else
-      @profiles = Profile.all
+      @profiles = Profile.geocoded
     end
-    @markers = @profiles.geocoded.map do |profile|
+
+    @markers = @profiles.map do |profile|
       {
         lat: profile.latitude,
         lng: profile.longitude,
