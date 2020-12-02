@@ -7,4 +7,9 @@ class User < ApplicationRecord
   has_one :profile
   has_many :conversations
   validates :email, presence: true
+
+  def capitalized_user
+    first_name.capitalize
+    last_name.capitalize
+  end
 end

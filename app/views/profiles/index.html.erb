@@ -6,7 +6,7 @@
       <div class="col-lg-4" style="width: 18rem;">
         <img class="card-img-top" src="https://picsum.photos/1000" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title"><%= link_to profile.user.first_name, profile_path(profile) %></h5>
+          <h5 class="card-title"><%= link_to profile.user.first_name.capitalized_user, profile_path(profile) %></h5>
           <p class="card-text"><%= profile.skill_list %></p>
           <!-- <a href="profile_path" class="btn btn-primary">Show</a>   -->
         </div>
