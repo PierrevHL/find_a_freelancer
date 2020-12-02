@@ -1,3 +1,4 @@
+<br>
 <div class="container">
   <div class="row">
     <div class="col-md-4">
@@ -8,11 +9,13 @@
       <% end %>
     </div>
     <div class="col-md-4">
+      <h2><%= @profile.user.first_name.capitalize %></h2>
+      <br>
       <h2><% @profile.skills.each do |skill| %>
       <p><%= skill.name %></p>
       <% end %></h2>
       <br>
-      <h2><%= @profile.description %></h2>
+      <h3><%= @profile.description %></h3>
       <br>
       <p><%= @profile.location %></p>
       <br>
@@ -29,7 +32,6 @@
     </div>
   </div>
 </div>
-
 
 <div class="container my-5">
   <div class="d-flex justify-content-around mx-5 px-5">
