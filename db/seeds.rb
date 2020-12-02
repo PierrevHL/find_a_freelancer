@@ -8,10 +8,13 @@
 
 require "open-uri"
 
+puts "Cleaning database"
 
 Booking.destroy_all
 Profile.destroy_all
 User.destroy_all
+
+puts "Database claned"
 
 skill = ["Photographer", "Programmer", "UX Designer", "Cleaner", "Plumber", "Electrical technician", "Tutor", "Translator", "Driver", "Gardener", "Model"]
 
@@ -23,6 +26,7 @@ skill = ["Photographer", "Programmer", "UX Designer", "Cleaner", "Plumber", "Ele
     password: "123123",
     username: Faker::Internet.username
   )
+  puts "#{User.count} users created"
 end
 
 User.first(50).each do |user|
@@ -40,6 +44,7 @@ User.first(50).each do |user|
 
   profile.skill_list.add(skill.sample)
   profile.save!
+  puts "#{Profile.count} profiles created"
 end
 
 Profile.first(20).each do |profile|
@@ -55,4 +60,7 @@ end
     user: User.all.sample,
     profile: Profile.all.sample,
   )
+  puts "#{Booking.count} bookings created"
 end
+
+puts "Finished seeding"
