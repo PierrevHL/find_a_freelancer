@@ -28,7 +28,7 @@ import "../plugins/flatpickr";
 
 // Internal imports, e.g:
 import { initMapbox } from '../plugins/init_mapbox';
-// import { initSelect2 } from '../components/init_select2';
+import { initSelect2 } from '../plugins/init_select2';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
@@ -37,4 +37,5 @@ document.addEventListener('turbolinks:load', () => {
 
 document.addEventListener('turbolinks:load', () => {
   initMapbox();
+  initSelect2();
 })
