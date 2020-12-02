@@ -8,7 +8,9 @@
       <% end %>
     </div>
     <div class="col-md-4">
-      <h2><%= @profile.description %></h2>
+      <h2><%= @profile.user.first_name.capitalized_user %></h2>
+      <br>
+      <h3><%= @profile.description %></h3>
       <br>
       <p><%= @profile.location %></p>
       <br>
