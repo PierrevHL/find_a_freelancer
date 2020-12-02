@@ -19,7 +19,7 @@ puts "Database claned"
 skill = ["Photographer", "Programmer", "UX Designer", "Cleaner", "Plumber", "Electrical technician", "Tutor", "Translator", "Driver", "Gardener", "Model"]
 skill = Profile::SKILLS
 
-100.times do
+20.times do
   User.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -30,7 +30,7 @@ skill = Profile::SKILLS
   puts "#{User.count} users created"
 end
 
-User.first(50).each do |user|
+User.first(20).each do |user|
   user.freelancer = true
   profile = Profile.create!(
     location: Faker::Nation.capital_city,
@@ -48,12 +48,12 @@ User.first(50).each do |user|
   puts "#{Profile.count} profiles created"
 end
 
-Profile.first(20).each do |profile|
+Profile.first(10).each do |profile|
   profile.location_specific = true
   profile.save!
 end
 
-20.times do
+10.times do
   start =  Date.today + rand(30..40)
   Booking.create!(
     start_date: start,
