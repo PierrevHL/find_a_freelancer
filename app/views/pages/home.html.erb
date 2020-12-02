@@ -2,13 +2,24 @@
 
 <h1>Find a freelancer</h1>
 
-<div class="container-fluid background">
+<div class="container">
+  <div class="form-wrapper" style="width: 400px; margin: 0 auto;">
+    <h2>Search</h2>
+
+    <%= simple_form_for :search, method: "get" do |f| %>
+      <%= f.input :starts_at, as: :string, required: false, input_html: {class: "datepicker"} %>
+      <%= f.input :ends_at, as: :string, required: false, input_html: {class: "datepicker"} %>
+      <%= f.button :submit, "Go", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+<!-- <div class="container-fluid background">
   <div class="container">
     <div class="row">
       <div class="col-md-6">
         <h1>Search</h1>
       </div>
-<!--       <div class="col-md-4">
+      <div class="col-md-4">
         <div class="card my-3" style="width: 18rem;">
           <div class="card-header">
             Messages
@@ -19,7 +30,7 @@
             <li class="list-group-item">Message 3</li>
           </ul>
         </div>
-      </div> -->
+      </div>
       <div class="col-md-6">
         <div class="card my-3" style="width: 18rem;">
           <div class="card-header">
@@ -35,3 +46,4 @@
     </div>
   </div>
 </div>
+ -->
