@@ -1,10 +1,16 @@
 class ProfilesController < ApplicationController
   def index
     search_query = params[:query]
-    if search_query 
+    if search_query
       @profiles = Profile.where("location ILIKE '%#{search_query}%'")
     else
       @profiles = Profile.all
+    end
+    @markers = @profiles.geocoded.map do |profile|
+      {
+        lat: profile.latitude,
+        lng: profile.longitude
+      }
     end
   end
 
