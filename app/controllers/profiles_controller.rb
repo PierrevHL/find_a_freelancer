@@ -9,7 +9,8 @@ class ProfilesController < ApplicationController
     @markers = @profiles.geocoded.map do |profile|
       {
         lat: profile.latitude,
-        lng: profile.longitude
+        lng: profile.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { profile: profile })
       }
     end
   end
