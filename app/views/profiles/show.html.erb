@@ -20,10 +20,11 @@
       <br>
       <p><%= @profile.location %></p>
       <br>
-      <p><%= @profile.rate %>$</p>
+      <p><%= @profile.rate %>$ /per day</p>
     </div>
 
-    <div id='profile-booking-dates' data-unavailable="<%= @profile.unavailable_dates.to_json %>">
+    <div class="col-md-4">
+      <div id='profile-booking-dates' data-unavailable="<%= @profile.unavailable_dates.to_json %>">
       <% if @profile.user != current_user %>
         <%= simple_form_for [@profile, @booking] do |f| %>
           <%= f.input :start_date, html5: true %>
@@ -31,6 +32,7 @@
           <%= f.submit "Book", class: "btn btn-primary" %>
         <% end %>
       <% end %>
+      </div>
     </div>
 
   </div>

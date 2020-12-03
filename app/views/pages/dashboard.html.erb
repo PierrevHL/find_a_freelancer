@@ -1,10 +1,14 @@
 <div class="container">
-  <h2>Dashboard</h2>
+  <h2 class="row justify-content-center py-4">My bookings</h2>
     <% @bookings.each do |booking| %>
     <div class="list_card m-4">
-      <%= cl_image_tag booking.profile.image.key %>
+      <%= link_to profile_path(booking.profile) do %>
+       <%= cl_image_tag booking.profile.image.key %>
+      <% end %>
       <div class="list_card-info">
-        <h2><%= link_to booking.profile.user.first_name, profile_path(booking.profile) %></h2>
+        <%= link_to profile_path(booking.profile) do %>
+        <h2><%= booking.profile.user.first_name %></h2>
+         <% end %>
         <p><strong><%= booking.profile.skill_list %></strong> </p>
         <p><strong>Dates</strong> <%= booking.start_date %> - <%= booking.end_date %> </p>
       </div>
