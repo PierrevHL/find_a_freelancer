@@ -4,7 +4,9 @@
   <div class = "row">
     <% @profiles.each do |profile| %>
       <div class="col-lg-4" style="width: 18rem;">
-        <img class="card-img-top" src="https://picsum.photos/1000" alt="Card image cap">
+        <%= link_to profile_path(profile) do %>
+          <%= image_tag "https://picsum.photos/1000" , class: "some css class here" %>
+        <% end %>
         <div class="card-body">
           <h5 class="card-title"><%= link_to profile.user.first_name.capitalize, profile_path(profile) %></h5>
           <p class="card-text"><%= profile.skill_list %></p>
