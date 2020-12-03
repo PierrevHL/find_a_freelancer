@@ -5,7 +5,7 @@
       <% if @profile.image.attached?  %>
         <%= cl_image_tag @profile.image.key, height: 300, width: 400, crop: :fill %>
       <% else %>
-          <img src="https://picsum.photos/200/300" alt="">
+          <img src="https://picsum.photos/1000" alt="">
       <% end %>
     </div>
 
