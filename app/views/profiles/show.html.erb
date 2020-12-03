@@ -8,6 +8,7 @@
           <img src="https://picsum.photos/200/300" alt="">
       <% end %>
     </div>
+
     <div class="col-md-4">
       <h2><%= @profile.user.first_name.capitalize %></h2>
       <br>
@@ -21,15 +22,17 @@
       <br>
       <p><%= @profile.rate %>$</p>
     </div>
-    <div class="col-md-4">
+
+    <div id='profile-booking-dates' data-unavailable="<%= @profile.unavailable_dates.to_json %>">
       <% if @profile.user != current_user %>
         <%= simple_form_for [@profile, @booking] do |f| %>
           <%= f.input :start_date, html5: true %>
           <%= f.input :end_date, html5: true  %>
-          <%= f.submit "Book" %>
+          <%= f.submit "Book", class: "btn btn-primary" %>
         <% end %>
       <% end %>
     </div>
+
   </div>
 </div>
 <br>

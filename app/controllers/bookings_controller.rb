@@ -5,7 +5,7 @@ class BookingsController < ApplicationController
     @booking.user = @user
     @profile = Profile.find(params[:profile_id])
     @booking.profile = @profile
-    if @booking.save!
+    if @booking.save
       flash[:notice] = "Your booking is confirmed"
       redirect_to profile_path(@profile)
     else
