@@ -6,7 +6,7 @@
       <div class="col-lg-4" style="width: 18rem;">
         <% if profile.image.attached?  %>
           <%= link_to profile_path(profile) do %>
-            <%= cl_image_tag profile.image.key, height: 300, width: 400, crop: :fill %>
+            <%= cl_image_tag profile.image.key, height: 350, width: 400, crop: :fill %>
           <% end %>
         <% else %>
           <%= link_to profile_path(profile) do %>
