@@ -4,13 +4,19 @@ class ProfilesController < ApplicationController
   def index
     search_query = params[:query]
 
-    if params[:search]
+    sql_query = "\
+      users.first_name @@ :query \
+      OR profiles.location @@ :query \
+      OR users.last_name @@ :query \
+      OR tags.name @@ :query \
+    "
+    @profiles = Profile.geocoded
+
+    if params[:search].present?
       dates = params[:search][:starts_at].split("to").map(&:strip).map(&:to_date)
-      @profiles = Profile.geocoded.select { |profile| profile.available_on?(dates[0], dates[1]) }
-    elsif search_query
-      @profiles = Profile.where("location ILIKE '%#{search_query}%'").geocoded
-    else
-      @profiles = Profile.geocoded
+      @profiles = @profiles.select { |profile| profile.available_on?(dates[0], dates[1]) }
+    elsif search_query.present?
+      @profiles = @profiles.joins(:user, taggings: :tag).where(sql_query, query: "%#{params[:query]}%").distinct
     end
 
     @markers = @profiles.map do |profile|
