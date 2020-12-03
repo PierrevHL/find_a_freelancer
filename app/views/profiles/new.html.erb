@@ -1,10 +1,9 @@
 <h1>Create your profile</h1>
 
 <%= simple_form_for @profile do |f| %>
-  <%= f.input :skills, collection: Profile::SKILLS, input_html: { class: 'tags-selector', multiple: true },
+  <%= f.input :skills, collection: Profile::SKILLS, input_html: { class: 'tags-selector', multiple: true, autocomplete: "skills" },
               required: true,
-              autofocus: true,
-              input_html: { autocomplete: "skills" }%>
+              autofocus: true %>
   <%= f.input :location %>
   <%= f.input :description %>
   <%= f.input :rate, label: "daily fee" %>
