@@ -6,9 +6,7 @@
        <%= cl_image_tag booking.profile.image.key %>
       <% end %>
       <div class="list_card-info">
-        <%= link_to profile_path(booking.profile) do %>
-        <h2><%= booking.profile.user.first_name %></h2>
-         <% end %>
+        <h2><%= link_to booking.profile.user.first_name, profile_path(booking.profile) %></h2>
         <p><strong><%= booking.profile.skill_list %></strong> </p>
         <p><strong>Dates</strong> <%= booking.start_date %> - <%= booking.end_date %> </p>
       </div>
