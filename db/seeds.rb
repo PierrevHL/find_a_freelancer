@@ -40,7 +40,6 @@ User.first(20).each do |user|
 
   keyword = ["worker", "person", "businessman"].sample
   file = URI.open("https://source.unsplash.com/800x600/?#{keyword}")
-  byebug
   profile.image.attach(io: file, filename: "#{profile.user.first_name}.jpg", content_type: 'image/png')
 
   profile.skill_list.add(skill.sample)
