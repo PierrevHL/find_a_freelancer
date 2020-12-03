@@ -39,8 +39,12 @@
 <br>
 <div class="container my-5">
   <div class="d-flex justify-content-around mx-5 px-5">
-    <%= link_to "Edit profile", edit_profile_path(@profile), class: "btn btn-outline-secondary" %>
-    <%= link_to "Back to list", profiles_path, class: "btn btn-outline-secondary" %>
+    <% if @profile.user == current_user %>
+      <%= link_to "Edit profile", edit_profile_path(@profile), class: "btn btn-outline-secondary" %>
+      <%= link_to "Back to list", profiles_path, class: "btn btn-outline-secondary" %>
+    <% else %>
+        <%= link_to "Back to list", profiles_path, class: "btn btn-outline-secondary" %>
+    <% end %>
   </div>
 </div>
 
