@@ -25,7 +25,6 @@ skill = Profile::SKILLS
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
     password: "123123",
-    username: Faker::Internet.username
   )
   puts "#{User.count} users created"
 end
