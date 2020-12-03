@@ -1,6 +1,6 @@
-<h1>Profiles#index</h1>
 
 <div class="container">
+  <h2 class="row justify-content-center py-4">Freelancers</h2>
   <div class = "row">
     <% @profiles.each do |profile| %>
       <div class="col-lg-4" style="width: 18rem;">
@@ -25,7 +25,7 @@
 
 
 <div id="map"
-   style="width: 100%; height: 600px;"
+   style="width: 100%; height: 400px;"
    data-markers="<%= @markers.to_json %>"
    data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
