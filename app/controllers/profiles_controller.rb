@@ -10,7 +10,7 @@ class ProfilesController < ApplicationController
     elsif search_query
       @profiles = Profile.where("location ILIKE '%#{search_query}%'").geocoded
     else
-      @profiles = Profile.geocoded#
+      @profiles = Profile.geocoded
     end
 
     @markers = @profiles.map do |profile|
