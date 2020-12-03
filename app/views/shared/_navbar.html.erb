@@ -29,6 +29,7 @@
           <% if user_signed_in? %>
             <%= link_to "Dashboard", dashboard_path, class: "dropdown-item" %>
             <a class="dropdown-item" href="#">Messages</a>
+            <%= link_to "Profile", profile_path(current_user.profile), class:"dropdown-item"%>
             <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           <% else %>
             <%= link_to "Sign up", new_user_registration_path, class: "dropdown-item" %>
