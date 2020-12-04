@@ -30,20 +30,18 @@
           <%= link_to 'Send a message', conversations_path(sender_id: current_user.id, receiver_id: @profile.user.id), method: 'post', class:"btn btn-primary" %>
         </div>
 
-        <div id='profile-booking-dates' data-unavailable="<%= @profile.unavailable_dates.to_json %>">
-        <% if @profile.user != current_user %>
-          <%= simple_form_for [@profile, @booking] do |f| %>
-            <%= f.input :start_date, html5: true %>
-            <%= f.input :end_date, html5: true  %>
-            <%= f.submit "Book", class: "btn btn-primary" %>
+        <div id='profile-booking-dates'  data-rate="<%= @profile.rate %>" data-unavailable="<%= @profile.unavailable_dates.to_json %>">
+          <% if @profile.user != current_user %>
+            <%= simple_form_for [@profile, @booking] do |f| %>
+              <%= f.input :start_date,as: :date, html5: true %>
+              <%= f.input :end_date, html5: true  %>
+              <%= f.submit "Book", class: "btn btn-primary" %>
+            <% end %>
+            <p id="live-price" class="my-4"></p>
           <% end %>
-
-        <% end %>
         </div>
       </div>
     </div>
-
-  </div>
 </div>
 <br>
 <br>

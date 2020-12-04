@@ -1,0 +1,32 @@
+
+[1mFrom:[0m /home/pierre/code/PierrevHL/find_a_freelancer/app/controllers/profiles_controller.rb:22 ProfilesController#index:
+
+     [1;34m5[0m: [32mdef[0m [1;34mindex[0m
+     [1;34m6[0m:   search_query = params[[33m:query[0m]
+     [1;34m7[0m:   skill_query = params[[33m:skill[0m]
+     [1;34m8[0m: 
+     [1;34m9[0m:   sql_query = [31m[1;31m"[0m[31m\[0m
+    [1;34m10[0m:     users.first_name [1;37;41m@[0m[1;37;41m@[0m [33m:query[0m \
+    [1;34m11[0m:     [1;34;4mOR[0m profiles.location [1;37;41m@[0m[1;37;41m@[0m [33m:query[0m \
+    [1;34m12[0m:     [1;34;4mOR[0m users.last_name [1;37;41m@[0m[1;37;41m@[0m [33m:query[0m \
+    [1;34m13[0m:     [1;34;4mAND[0m tags.name [1;37;41m@[0m[1;37;41m@[0m [33m:skill[0m \
+    [1;34m14[0m:   [31m[1;31m"[0m[31m[0m
+    [1;34m15[0m:   @profiles = [1;34;4mProfile[0m.geocoded
+    [1;34m16[0m: 
+    [1;34m17[0m:   [32mif[0m params[[33m:search[0m].present?
+    [1;34m18[0m:     dates = params[[33m:search[0m][[33m:starts_at[0m].split([31m[1;31m"[0m[31mto[1;31m"[0m[31m[0m).map(&[33m:strip[0m).map(&[33m:to_date[0m)
+    [1;34m19[0m:     @profiles = @profiles.select { |profile| profile.available_on?(dates[[1;34m0[0m], dates[[1;34m1[0m]) }
+    [1;34m20[0m:   [32melsif[0m search_query.present? || skill_query.present?
+    [1;34m21[0m:     binding.pry
+ => [1;34m22[0m:     @profiles = @profiles.joins([33m:user[0m, [35mtaggings[0m: [33m:tag[0m).where(sql_query, [35mquery[0m: [31m[1;31m"[0m[31m%#{params[:query]}[0m[31m%[1;31m"[0m[31m[0m, [35mskill[0m: [31m[1;31m"[0m[31m%#{params[:skill]}[0m[31m%[1;31m"[0m[31m[0m).distinct
+    [1;34m23[0m:   [32mend[0m
+    [1;34m24[0m: 
+    [1;34m25[0m:   @markers = @profiles.map [32mdo[0m |profile|
+    [1;34m26[0m:     {
+    [1;34m27[0m:       [35mlat[0m: profile.latitude,
+    [1;34m28[0m:       [35mlng[0m: profile.longitude,
+    [1;34m29[0m:       [35minfoWindow[0m: render_to_string([35mpartial[0m: [31m[1;31m"[0m[31minfo_window[1;31m"[0m[31m[0m, [35mlocals[0m: { [35mprofile[0m: profile })
+    [1;34m30[0m:     }
+    [1;34m31[0m:   [32mend[0m
+    [1;34m32[0m: [32mend[0m
+

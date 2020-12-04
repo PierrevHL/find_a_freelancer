@@ -6,7 +6,7 @@ import rangePlugin from "flatpickr/dist/plugins/rangePlugin";
 
 const initFlatpickr = () => {
   // Check that the query selector id matches the one you put around your form.
-  
+
   const startDateInput = document.getElementById('booking_start_date');
   const endDateInput = document.getElementById('booking_end_date');
   const homeStart = document.getElementById('search_starts_at');
@@ -30,25 +30,11 @@ const initFlatpickr = () => {
       disable: unavailableDates,
       dateFormat: "Y-m-d"
       });
-    })
-  };
-
-
-  if(homeStart){
-    flatpickr(homeStart, {
-      minDate: "today",
-      dateFormat: "Y-m-d",
     });
-    flatpickr(homeEnd, {
-      minDate: "today",
-      dateFormat: "Y-m-d",
-    });
-  
-  
   }
+};
 
 
-}
 
 
 export { initFlatpickr }
