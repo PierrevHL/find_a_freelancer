@@ -8,5 +8,16 @@
 }
 
 .navbar-lewagon .navbar-brand img {
-  width: 40px;
+  width: 200px;
 }
+
+.btn-green {
+  color: $green;
+  border-style: solid $green 1px !important;
+}
+
+.dropdown-toggle {
+  background: $green;
+  border-style: solid $green 5px !important;
+}
+
