@@ -4,20 +4,33 @@ class ProfilesController < ApplicationController
 
   def index
     search_query = params[:query]
+    skill_query = params[:skill]
 
-    sql_query = "\
+    sql_full_query = "\
       users.first_name @@ :query \
       OR profiles.location @@ :query \
       OR users.last_name @@ :query \
-      OR tags.name @@ :query \
+      AND tags.name @@ :skill \
     "
+    sql_search_query = "\
+      users.first_name @@ :query \
+      OR profiles.location @@ :query \
+      OR users.last_name @@ :query
+    "
+    sql_skill_query = "tags.name @@ :skill"
     @profiles = Profile.geocoded
 
-    if params[:search].present?
-      dates = params[:search][:starts_at].split("to").map(&:strip).map(&:to_date)
-      @profiles = @profiles.select { |profile| profile.available_on?(dates[0], dates[1]) }
+    if search_query.present? && skill_query.present?
+      @profiles = @profiles.joins(:user, taggings: :tag).where(sql_full_query, query: "%#{params[:query]}%", skill: params[:skill]).distinct
     elsif search_query.present?
-      @profiles = @profiles.joins(:user, taggings: :tag).where(sql_query, query: "%#{params[:query]}%").distinct
+      @profiles = @profiles.joins(:user, taggings: :tag).where(sql_search_query, query: "%#{params[:query]}%").distinct
+    elsif skill_query.present?
+      @profiles = @profiles.joins(:user, taggings: :tag).where(sql_skill_query, skill: "%#{params[:skill]}%").distinct
+    end
+
+    if params[:search] &&  params[:search][:starts_at]
+    dates = params[:search][:starts_at].split("to").map(&:strip).map(&:to_date)
+    @profiles = @profiles.select { |profile| profile.available_on?(dates[0], dates[1]) }
     end
 
     @markers = @profiles.map do |profile|
