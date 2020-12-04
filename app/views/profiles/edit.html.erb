@@ -1,7 +1,7 @@
 <h1>Update your profile</h1>
 
 <%= simple_form_for @profile do |f| %>
-  <%= f.input :skills, collection: Profile::SKILLS, input_html: { class: 'tags-selector', multiple: true, autocomplete: "skills" },
+  <%= f.input :skill_list, collection: Profile::SKILLS, input_html: { class: 'tags-selector', multiple: true, autocomplete: "skills" },
               required: true,
               autofocus: true %>
   <%= f.input :location %>

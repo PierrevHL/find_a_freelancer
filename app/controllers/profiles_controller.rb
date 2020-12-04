@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show, :edit, :update]
+  before_action :set_profile, only: [:edit, :update, :show]
 
   def index
     search_query = params[:query]
@@ -29,7 +30,6 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @profile = Profile.find(params[:id])
     @booking = Booking.new
   end
 
@@ -66,7 +66,7 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:location, :rate, :description, :location_specific, :image)
+    params.require(:profile).permit(:location, :rate, :description, :location_specific, :image, skill_list: [])
   end
 
   def set_profile
