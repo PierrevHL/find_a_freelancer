@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:index, :show, :edit, :update]
 
   def index
     search_query = params[:query]
@@ -46,9 +46,24 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @profile.update(profile_params)
+      redirect_to profile_path(@profile)
+    else
+      render :new
+    end
+  end
+
   private
 
   def profile_params
     params.require(:profile).permit(:location, :rate, :description, :location_specific, :image)
+  end
+
+  def set_profile
+    @profile = Profile.find(params[:id])
   end
 end
