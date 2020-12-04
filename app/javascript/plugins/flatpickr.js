@@ -28,8 +28,10 @@ const initFlatpickr = () => {
       dateFormat: "Y-m-d"
       });
     })
-  };
+  }
 }
+
+
 
 
 export { initFlatpickr }
