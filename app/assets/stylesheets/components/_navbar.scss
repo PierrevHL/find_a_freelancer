@@ -12,11 +12,12 @@
 }
 
 .btn-green {
-  color: green;
-  border-style: solid green 1px !important;
+  color: $green;
+  border-style: solid $green 1px !important;
 }
 
 .dropdown-toggle {
-  background: green;
-  border-style: solid green 5px !important;
+  background: $green;
+  border-style: solid $green 5px !important;
 }
+
