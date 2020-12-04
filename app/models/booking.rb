@@ -6,6 +6,10 @@ class Booking < ApplicationRecord
 
   validate :end_date_after_start_date
 
+  def total_price
+    (end_date - start_date).to_i * profile.rate
+  end
+
   def booking_summary
     period = end_date - start_date
     period * profile.rate
