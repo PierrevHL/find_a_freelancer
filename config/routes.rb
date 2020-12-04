@@ -6,7 +6,8 @@ Rails.application.routes.draw do
     resources :bookings, only: [:create]
   end
   resources :conversations, only: [:index, :show, :create] do
-    resources :messages, only: [:create]
+    resources :messages, only: [:index, :new, :create]
   end
   get "/dashboard", to: "pages#dashboard"
 end
+

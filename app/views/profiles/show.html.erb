@@ -42,10 +42,15 @@
 <div class="container my-5">
   <div class="d-flex justify-content-around mx-5 px-5">
     <% if @profile.user == current_user %>
-      <%= link_to "Edit profile", edit_profile_path(@profile), class: "btn btn-outline-secondary" %>
-      <%= link_to "Back to list", profiles_path, class: "btn btn-outline-secondary" %>
+      <%= link_to "Edit profile", edit_profile_path(@profile), class:"btn btn-outline-secondary" %>
+      <%= link_to "Back to list", profiles_path, class:"btn btn-outline-secondary" %>
     <% else %>
-        <%= link_to "Back to list", profiles_path, class: "btn btn-outline-secondary" %>
+      <%= link_to "Back to list", profiles_path, class:"btn btn-outline-secondary" %>
+      <% if user.id != current_user.id %>
+        <div class="item">
+          <%= user.first_name %> <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, receiver_id: user.id), method: 'post', class:"btn btn-outline-secondary"%>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>
