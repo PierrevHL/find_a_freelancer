@@ -32,6 +32,9 @@ const initFlatpickr = () => {
       });
     });
   }
+
+  flatpickr(homeStart, { dateFormat: "Y-m-d" })
+  flatpickr(homeEnd, { dateFormat: "Y-m-d" })
 };
 
 
