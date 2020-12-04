@@ -5,10 +5,16 @@
       <%= link_to profile_path(booking.profile) do %>
        <%= cl_image_tag booking.profile.image.key %>
       <% end %>
-      <div class="list_card-info">
-        <h2><%= link_to booking.profile.user.first_name, profile_path(booking.profile) %></h2>
-        <p><strong><%= booking.profile.skill_list %></strong> </p>
-        <p><strong>Dates</strong> <%= booking.start_date %> - <%= booking.end_date %> </p>
+      <div class="list_card-info w-100">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h2><%= link_to booking.profile.user.first_name, profile_path(booking.profile) %></h2>
+            <p><strong><%= booking.profile.skill_list %></strong> </p>
+            <p><strong>Dates</strong> <%= booking.start_date %> - <%= booking.end_date %> </p>
+          </div>
+
+          <p><strong><%= booking.total_price %>$</strong></p>
+        </div>
       </div>
     </div>
   <% end %>
