@@ -6,6 +6,10 @@ class Booking < ApplicationRecord
 
   validate :end_date_after_start_date
 
+  def booking_summary
+    period = end_date - start_date
+    period * profile.rate
+  end
   private
 
   def check_booking_dates
@@ -17,4 +21,6 @@ class Booking < ApplicationRecord
       errors.add(:end_date, "must be after the start date")
     end
   end
+
+
 end
