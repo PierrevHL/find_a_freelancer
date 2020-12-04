@@ -27,7 +27,7 @@
       <div class="d-flex justify-content-around mx-5 px-5">
 
         <div id='profile-booking-dates'  data-rate="<%= @profile.rate %>" data-unavailable="<%= @profile.unavailable_dates.to_json %>">
-          <% if @profile.user != current_user %>
+          <% if (@profile.user != current_user) && user_signed_in? %>
             <div class="item">
               <%= link_to 'Send a message', conversations_path(sender_id: current_user.id, receiver_id: @profile.user.id), method: 'post', class:"btn btn-primary" %>
             </div>
