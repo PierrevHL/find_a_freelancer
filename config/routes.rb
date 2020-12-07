@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   resources :profiles, except: [:delete] do
     resources :bookings, only: [:create]
   end
+  resources :bookings, only: [] do
+    resources :user_reviews, only: [:index, :new, :create]
+    resources :freelancer_reviews, only: [:index, :new, :create]
+  end
   resources :conversations, only: [:index, :show, :create] do
     resources :messages, only: [:index, :new, :create]
   end
