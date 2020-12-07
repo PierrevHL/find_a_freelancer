@@ -32,6 +32,26 @@ const initFlatpickr = () => {
       });
     });
   }
+
+  if (homeStart) {
+    homeEnd.disabled = true
+  
+    flatpickr(homeStart, {
+      minDate: "today",
+      dateFormat: "Y-m-d",
+    });
+  
+    homeStart.addEventListener("change", (e) => {
+      if (homeStart != "") {
+        homeEnd.disabled = false
+      }
+      flatpickr(homeEnd, {
+        minDate: e.target.value,
+        dateFormat: "Y-m-d"
+        });
+      });
+    }
+
 };
 
 
