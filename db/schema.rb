@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_07_091606) do
+ActiveRecord::Schema.define(version: 2020_12_07_102157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,11 @@ ActiveRecord::Schema.define(version: 2020_12_07_091606) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "profile_skills", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.string "location"
     t.integer "rate"
@@ -86,6 +91,12 @@ ActiveRecord::Schema.define(version: 2020_12_07_091606) do
     t.float "latitude"
     t.float "longitude"
     t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|

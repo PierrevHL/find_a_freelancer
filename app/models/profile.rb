@@ -4,10 +4,8 @@ class Profile < ApplicationRecord
   has_many :bookings
   has_one_attached :image
   validates :rate, presence: true
-  acts_as_taggable_on :skills
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?
-
 
   def available_on?(start_date, end_date)
     bookings.where("(? >= start_date AND ? <= end_date) OR (? >= start_date AND ? <= end_date)", start_date, end_date, start_date, end_date).empty?
