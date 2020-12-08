@@ -11,6 +11,7 @@
             <h2><%= link_to booking.profile.user.first_name, profile_path(booking.profile) %></h2>
             <p><strong><%= booking.profile_skill.skill.name %></strong> </p>
             <p><strong>Dates</strong> <%= booking.start_date %> - <%= booking.end_date %> </p>
+            <p><strong>Status</strong> <%= booking.status %></p>
           </div>
 
           <p><strong><%= booking.total_price %>$</strong></p>

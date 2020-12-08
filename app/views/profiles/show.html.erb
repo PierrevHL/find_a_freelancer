@@ -17,7 +17,7 @@
       <% @profile.profile_skills.each do |profile_skill| %>
         <div class="d-flex justify-content-between">
           <p><%= profile_skill.skill.name %></p>
-          <p><%= profile_skill.rate || 0 %><%= " $/hour" %></p>
+          <p data-profile-skill="ps-<%= profile_skill.id %>" data-rate="<%= profile_skill.rate %>"><%= profile_skill.rate || 0 %><%= " $/hour" %></p>
         </div>
       <% end %>
 
