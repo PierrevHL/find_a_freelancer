@@ -29,7 +29,7 @@ class ProfilesController < ApplicationController
     end
 
 
-    if params[:search] && params[:search][:starts_at]
+    if params[:search].present? && params[:search][:starts_at].present?
       dates = [params[:search][:starts_at], params[:search][:ends_at]].map(&:strip).map(&:to_date)
       @profiles = @profiles.select { |profile| profile.available_on?(dates[0], dates[1]) }
     end
