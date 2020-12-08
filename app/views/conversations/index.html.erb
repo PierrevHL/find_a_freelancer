@@ -3,8 +3,8 @@
   <div class="ui list">
     <div class="item">
       <% @conversations.each do |conversation| %>
-        <div class="d-flex justify-content-around mx-5 px-5">
-          <div class = container my-3>
+        <div class="d-flex mx-5 px-5">
+          <div class="container w-fit">
           <% if conversation.messages.length > 0 %>
             <% if conversation.sender_id == current_user.id || conversation.receiver_id == current_user.id %>
               <% if conversation.sender_id == current_user.id %>
@@ -16,36 +16,38 @@
             <% end %>
           <% end %>
           </div>
-          <div class = container>
-          <% conversation.messages.each do |message| %>
-            <% if message.content %>
-              <% user = User.find(message.user_id) %>
-              <div class="item">
-                <div class="content">
-                <div class="header"><strong><%= user.first_name %><%= " " %></strong><%= message.message_time %></div>
-                  <div class="list">
-                    <div class="item">
-                      <i class="right triangle icon"></i>
-                      <%= message.content %>
+          <div class="d-flex justify-content-around flex-grow-1">
+            <div class="container">
+              <% conversation.messages.each do |message| %>
+                <% if message.content %>
+                  <% user = User.find(message.user_id) %>
+                  <div class="item">
+                    <div class="content">
+                      <div class="header"><strong><%= user.first_name %><%= " " %></strong><%= message.message_time %></div>
+                      <div class="list">
+                        <div class="item">
+                          <i class="right triangle icon"></i>
+                          <%= message.content %>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            <% end %>
-          <% end %>
-          </div>
-          <div class = container>
-          <% if conversation.messages.length > 0 %>
-            <%= form_for [conversation, Message.new], html: {class: "ui reply form"} do |f| %>
-              <div class="field">
-                <%= f.text_area :content, class: "form-control" %>
-              </div>
-              <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
-              <div>
-                <%= f.submit "Add Reply", class: "btn-primary" %>
-              </div>
-            <% end %>
-          <% end %>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="container">
+              <% if conversation.messages.length > 0 %>
+                <%= form_for [conversation, Message.new] do |f| %>
+                  <div class="field">
+                    <%= f.text_area :content, class:"form-control" %>
+                  </div>
+                  <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
+                  <div>
+                    <%= f.submit "Add Reply", class:"btn btn-primary" %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
           </div>
         </div>
       <% end %>
