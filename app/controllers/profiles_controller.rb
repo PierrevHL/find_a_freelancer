@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show, :edit, :update]
-  before_action :set_profile, only: [:edit, :update, :show]
+  before_action :set_profile, only: [:edit, :update, :show, :edit_rates]
 
   def index
     search_query = params[:query]
@@ -57,7 +57,7 @@ class ProfilesController < ApplicationController
     @profile.user = @user
     if @profile.save
       params[:profile][:skills][1..-1].each do |skill|
-        @profile.skill_list.add(skill)
+        ProfileSkill.create!(profile: @profile, skill_id: skill)
       end
       @profile.save
       redirect_to profile_path(@profile)
@@ -77,10 +77,14 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def edit_rates
+  end
+
+
   private
 
   def profile_params
-    params.require(:profile).permit(:location, :rate, :description, :location_specific, :image, skill_list: [])
+    params.require(:profile).permit(:location, :description, :location_specific, :image)
   end
 
   def set_profile
