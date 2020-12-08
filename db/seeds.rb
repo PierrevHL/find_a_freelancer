@@ -54,11 +54,11 @@ end
 
 5.times do
   start =  Date.today + rand(30..40)
-  Booking.create!(
+  Booking.create(
     start_date: start,
     end_date: start + rand(2..3),
     user: User.all.sample,
-    profile: ProfileSkill.all.sample,
+    profile_skill: ProfileSkill.all.sample,
   )
   puts "#{Booking.count} bookings created"
 end
