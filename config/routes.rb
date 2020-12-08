@@ -9,10 +9,9 @@ Rails.application.routes.draw do
   end
 
   resources :profile_skills, except: [:destroy] do
-    resources :bookings, only: [:create]
   end
 
-  resources :bookings, only: [] do
+  resources :bookings, only: [:create] do
     resources :user_reviews, only: [:index, :new, :create]
     resources :freelancer_reviews, only: [:index, :new, :create]
   end
