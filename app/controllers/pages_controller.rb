@@ -8,6 +8,7 @@ class PagesController < ApplicationController
 
   def dashboard
     @bookings = current_user.bookings
+    # compare booking end date with todays date (once default status has been assigned)
     @my_bookings = Booking.where(profile: current_user.profile)
   end
 end
