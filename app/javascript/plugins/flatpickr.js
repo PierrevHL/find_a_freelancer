@@ -33,6 +33,7 @@ const initFlatpickr = () => {
     });
   }
 
+<<<<<<< HEAD
   if (homeStart) {
     homeEnd.disabled = true
   
@@ -52,6 +53,10 @@ const initFlatpickr = () => {
       });
     }
 
+=======
+  flatpickr(homeStart, { dateFormat: "Y-m-d" })
+  flatpickr(homeEnd, { dateFormat: "Y-m-d" })
+>>>>>>> 78188a2126493ff7eaa2770c99deca1f0b233149
 };
 
 
