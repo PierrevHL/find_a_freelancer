@@ -29,11 +29,15 @@
         <div id='profile-booking-dates'  data-rate="<%= @profile.rate %>" data-unavailable="<%= @profile.unavailable_dates.to_json %>">
           <% if @profile.user != current_user %>
             <div class="item">
-            <%= link_to 'Send a message', conversations_path(sender_id: current_user.id, receiver_id: @profile.user.id), method: 'post', class:"btn btn-primary" %>
+            <% if user_signed_in? %>
+              <%= link_to 'Send a message', conversations_path(sender_id: current_user.id, receiver_id: @profile.user.id), method: 'post', class:"btn btn-primary" %>
+            <% else %>
+              <%= link_to 'Send a message', conversations_path, class:"btn btn-primary" %>
+            <% end %>
             </div>
             <%= simple_form_for [@profile, @booking] do |f| %>
-              <%= f.input :start_date,as: :date, html5: true %>
-              <%= f.input :end_date, html5: true  %>
+              <%= f.input :start_date,as: :date, html5: true, input_html: {value: session[:start_date]} %>
+              <%= f.input :end_date,as: :date, html5: true, input_html: {value: session[:end_date]}  %>
               <%= f.submit "Book", class: "btn btn-primary" %>
             <% end %>
             <p id="live-price" class="my-4"></p>
