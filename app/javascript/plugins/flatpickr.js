@@ -13,8 +13,9 @@ const initFlatpickr = () => {
   const homeEnd = document.getElementById('search_ends_at');
   if (startDateInput) {
   const unavailableDates = JSON.parse(document.querySelector('#profile-booking-dates').dataset.unavailable)
-  endDateInput.disabled = true
-
+  if (startDateInput == "") {
+    endDateInput.disabled = true
+  }
   flatpickr(startDateInput, {
     minDate: "today",
     disable: unavailableDates,
