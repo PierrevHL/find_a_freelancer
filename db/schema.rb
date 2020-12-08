@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_08_025231) do
+ActiveRecord::Schema.define(version: 2020_12_08_035340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,13 +39,14 @@ ActiveRecord::Schema.define(version: 2020_12_08_025231) do
   create_table "bookings", force: :cascade do |t|
     t.date "start_date"
     t.date "end_date"
-    t.bigint "profile_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.time "start_time"
     t.time "end_time"
-    t.index ["profile_id"], name: "index_bookings_on_profile_id"
+    t.string "status"
+    t.bigint "profile_skill_id", null: false
+    t.index ["profile_skill_id"], name: "index_bookings_on_profile_skill_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
@@ -80,11 +81,15 @@ ActiveRecord::Schema.define(version: 2020_12_08_025231) do
   create_table "profile_skills", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "profile_id", null: false
+    t.bigint "skill_id", null: false
+    t.integer "rate"
+    t.index ["profile_id"], name: "index_profile_skills_on_profile_id"
+    t.index ["skill_id"], name: "index_profile_skills_on_skill_id"
   end
 
   create_table "profiles", force: :cascade do |t|
     t.string "location"
-    t.integer "rate"
     t.string "description"
     t.bigint "user_id", null: false
     t.boolean "location_specific"
@@ -154,13 +159,15 @@ ActiveRecord::Schema.define(version: 2020_12_08_025231) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "bookings", "profiles"
+  add_foreign_key "bookings", "profile_skills"
   add_foreign_key "bookings", "users"
   add_foreign_key "conversations", "users", column: "receiver_id"
   add_foreign_key "conversations", "users", column: "sender_id"
   add_foreign_key "freelancer_reviews", "bookings"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
+  add_foreign_key "profile_skills", "profiles"
+  add_foreign_key "profile_skills", "skills"
   add_foreign_key "profiles", "users"
   add_foreign_key "taggings", "tags"
   add_foreign_key "user_reviews", "bookings"

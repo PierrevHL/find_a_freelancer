@@ -1,9 +1,8 @@
 class Profile < ApplicationRecord
   SKILLS = ["Photographer", "Programmer", "UX Designer", "Cleaner", "Plumber", "Electrical technician", "Tutor", "Translator", "Driver", "Gardener", "Model"]
   belongs_to :user
-  has_many :bookings
+  has_many :profile_skills
   has_one_attached :image
-  validates :rate, presence: true
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?
 
