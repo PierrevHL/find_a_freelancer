@@ -28,9 +28,10 @@ class ProfilesController < ApplicationController
       @profiles = @profiles.joins(:user, taggings: :tag).where(sql_skill_query, skill: "%#{params[:skill]}%").distinct
     end
 
-    if params[:search] && params[:search][:starts_at]
-    dates = params[:search][:starts_at].split("to").map(&:strip).map(&:to_date)
-    @profiles = @profiles.select { |profile| profile.available_on?(dates[0], dates[1]) }
+
+    if params[:search].present? && params[:search][:starts_at].present?
+      dates = [params[:search][:starts_at], params[:search][:ends_at]].map(&:strip).map(&:to_date)
+      @profiles = @profiles.select { |profile| profile.available_on?(dates[0], dates[1]) }
     end
 
     @markers = @profiles.map do |profile|
