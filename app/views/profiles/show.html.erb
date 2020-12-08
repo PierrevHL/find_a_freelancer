@@ -28,15 +28,19 @@
     <div class="col-md-4">
       <div class="d-flex justify-content-around mx-5 px-5">
 
-        <div id='profile-booking-dates'  data-rate="" data-unavailable="<%= @profile.unavailable_dates.to_json %>">
+        <div id='profile-booking-dates'  data-rate="<%= @profile.rate %>" data-unavailable="<%= @profile.unavailable_dates.to_json %>">
           <% if (@profile.user != current_user) && user_signed_in? %>
             <div class="item">
+            <% if user_signed_in? %>
               <%= link_to 'Send a message', conversations_path(sender_id: current_user.id, receiver_id: @profile.user.id), method: 'post', class:"btn btn-primary" %>
+            <% else %>
+              <%= link_to 'Send a message', conversations_path, class:"btn btn-primary" %>
+            <% end %>
             </div>
             <%= simple_form_for [@booking] do |f| %>
               <%= f.input :profile_skill, collection: @profile.profile_skills.map {|profile_skill| [profile_skill.skill.name, profile_skill.id] } %>
-              <%= f.input :start_date,as: :date, html5: true %>
-              <%= f.input :end_date, html5: true  %>
+              <%= f.input :start_date,as: :date, html5: true, input_html: {value: session[:start_date]} %>
+              <%= f.input :end_date, html5: true, input_html: {value: session[:end_date]} %>
               <%= f.submit "Book", class: "btn btn-primary" %>
             <% end %>
             <p id="live-price" class="my-4"></p>
