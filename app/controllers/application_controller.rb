@@ -19,9 +19,11 @@ class ApplicationController < ActionController::Base
     if params[:booking]
       session[:start_date] = params[:booking][:start_date]
       session[:end_date] = params[:booking][:end_date]
+      session[:profile_skill] = params[:booking][:profile_skill]
     elsif request.referer && !request.referer.match(/users/) && !devise_controller?
       session[:start_date] = nil 
       session[:end_date] = nil
+      session[:profile_skill] = nil
     end
   end
 
