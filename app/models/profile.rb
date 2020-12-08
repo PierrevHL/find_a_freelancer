@@ -10,7 +10,7 @@ class Profile < ApplicationRecord
 
 
   def available_on?(start_date, end_date)
-    bookings.where("(? >= start_date AND ? <= end_date) OR (? >= start_date AND ? <= end_date)", start_date, end_date, start_date, end_date).empty?
+    bookings.where("(? >= start_date AND ? <= end_date) OR (? >= start_date AND ? <= end_date)", start_date, start_date, end_date, end_date).empty?
   end
 
   def unavailable_dates

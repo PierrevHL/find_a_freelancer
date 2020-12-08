@@ -16,3 +16,57 @@
     <% end %>
   </div>
 </div>
+
+<div class="container job-types">
+  <h2 class="centered">Job Categories</h2>
+  <div class="row">
+    <%= link_to profiles_path(job_type: "Plumbing")  do%>
+    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+      <div class="card-profile" style="background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)), url(' <%= cl_image_path "pexels-roger-brown-5414383_wguqzm" %>')">
+        <div class ="card-title"><p>Plumbers</p></div>
+        <div class ="card-subtitle"> Leaky pipes? Weak shower pressure? Get the best plumbers.</div>
+      </div>
+    </div>
+    <% end %>
+    <%= link_to profiles_path(job_type: "Landscaping")  do%>
+    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+      <div class="card-profile" style="background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)), url(' <%= cl_image_path "landscaper_c3g4z8" %>')">
+        <div class ="card-title"><p>Landscapers</p></div>
+        <div class ="card-subtitle"> Overgrown grass? Dirty backyard? We are here for you.</div>
+      </div>
+    </div>
+    <% end %>
+    <%= link_to profiles_path(job_type: "Driving")  do%>
+    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+      <div class="card-profile" style="background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)), url(' <%= cl_image_path "pexels-pixabay-33488_ruahkj" %>')">
+        <div class ="card-title"><p>Drivers</p></div>
+        <div class ="card-subtitle"> Professionals who help you explore areas around you. </div>
+      </div>
+    </div>
+    <% end %>
+    <%= link_to profiles_path(job_type: "Housekeeping")  do%>
+    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+      <div class="card-profile" style="background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)), url(' <%= cl_image_path "pexels-ketut-subiyanto-4353615_x8sdc4" %>')">
+        <div class ="card-title"><p>Housekeepers</p></div>
+        <div class ="card-subtitle"> Clean your house in a few hours, with guaranteed quality.</div>
+      </div>
+    </div>
+    <% end %>
+    <%= link_to profiles_path(job_type: "Cooking")  do%>
+    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+      <div class="card-profile" style="background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)), url(' <%= cl_image_path "pexels-malidate-van-784631_zzix3e" %>')">
+        <div class ="card-title"><p>Chefs</p></div>
+        <div class ="card-subtitle"> Watch the chefs dance in the kitchen. Your kitchen only. </div>
+      </div>
+    </div>
+    <% end %>
+    <%= link_to profiles_path(job_type: "Babysitting")  do%>
+    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+      <div class="card-profile" style="background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)), url(' <%= cl_image_path "pexels-alex-green-5691833_vgfpmy" %>')">
+        <div class ="card-title"><p>Babysitters</p></div>
+        <div class ="card-subtitle"> All the love in the world for your children. </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
