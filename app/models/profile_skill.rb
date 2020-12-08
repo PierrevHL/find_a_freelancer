@@ -1,4 +1,5 @@
 class ProfileSkill < ApplicationRecord
   belongs_to :profile
-  validates :rate, presence: true
+  belongs_to :skill
+  has_many :bookings
 end

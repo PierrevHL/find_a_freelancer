@@ -1,0 +1,9 @@
+<% @profile.profile_skills.each do |profile_skill| %>
+  <%= simple_form_for profile_skill do |f| %>
+  <div class="d-flex align-items-center">
+    <%= f.input :skill, input_html: { value: profile_skill.skill.name, disabled: true } %>
+    <%= f.input :rate %>
+    <%= f.submit "Set Rate" %>
+  </div>
+  <% end %>
+<% end %>

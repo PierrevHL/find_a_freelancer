@@ -1,5 +1,5 @@
 class Booking < ApplicationRecord
-  belongs_to :profile_skills
+  belongs_to :profile_skill
   belongs_to :user
   validates :start_date, :end_date, :start_time, :end_time, presence: true
   validate :check_booking_dates

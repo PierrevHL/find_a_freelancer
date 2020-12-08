@@ -15,9 +15,9 @@ Profile.destroy_all
 User.destroy_all
 
 puts "Database claned"
-
 skill = ["Photographer", "Programmer", "UX Designer", "Cleaner", "Plumber", "Electrical technician", "Tutor", "Translator", "Driver", "Gardener", "Model"]
-skill = Profile::SKILLS
+
+skill.each {|skill| Skill.create(name: skill)}
 
 20.times do
   User.create!(
@@ -29,11 +29,10 @@ skill = Profile::SKILLS
   puts "#{User.count} users created"
 end
 
-User.first(20).each do |user|
+User.first(4).each do |user|
   user.freelancer = true
   profile = Profile.create!(
     location: Faker::Nation.capital_city,
-    rate: rand(50..100),
     description: Faker::Quote.famous_last_words,
     user_id: user.id
   )
@@ -42,8 +41,9 @@ User.first(20).each do |user|
   file = URI.open("https://source.unsplash.com/800x600/?#{keyword}")
   profile.image.attach(io: file, filename: "#{profile.user.first_name}.jpg", content_type: 'image/png')
 
-  profile.skill_list.add(skill.sample)
-  profile.save!
+  rand(1..3).times do
+    ProfileSkill.create!(profile_id: profile.id, skill: Skill.all.sample, rate: rand(50..100))
+  end
   puts "#{Profile.count} profiles created"
 end
 
@@ -52,13 +52,13 @@ Profile.first(10).each do |profile|
   profile.save!
 end
 
-10.times do
+5.times do
   start =  Date.today + rand(30..40)
   Booking.create!(
     start_date: start,
     end_date: start + rand(2..3),
     user: User.all.sample,
-    profile: Profile.all.sample,
+    profile: ProfileSkill.all.sample,
   )
   puts "#{Booking.count} bookings created"
 end
