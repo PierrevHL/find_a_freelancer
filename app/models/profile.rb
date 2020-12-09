@@ -2,6 +2,7 @@ class Profile < ApplicationRecord
   belongs_to :user
   has_many :profile_skills
   has_many :bookings, through: :profile_skills
+  has_many :freelancer_reviews, through: :bookings
   has_many :skills, through: :profile_skills
   has_one_attached :image
   geocoded_by :location

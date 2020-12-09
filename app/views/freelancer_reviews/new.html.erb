@@ -1,0 +1,7 @@
+<h1>Review <%= @booking.profile_skill.profile.user.first_name %>'s work:</h1>
+
+<%= simple_form_for [@booking, @freelancer_review] do |f| %>
+  <%= f.input :content %>
+  <%= f.input :rating %>
+  <%= f.submit %>
+<% end %>
