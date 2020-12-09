@@ -16,10 +16,11 @@ const initFlatpickr = () => {
   if (startDateInput == "") {
     endDateInput.disabled = true
   }
+  
   flatpickr(startDateInput, {
     minDate: "today",
     disable: unavailableDates,
-    dateFormat: "Y-m-d",
+    dateFormat: "Y-m-d"
   });
 
   startDateInput.addEventListener("change", (e) => {
@@ -30,16 +31,17 @@ const initFlatpickr = () => {
       minDate: e.target.value,
       disable: unavailableDates,
       dateFormat: "Y-m-d"
-      });
+    });
     });
   }
 
   if (homeStart) {
     homeEnd.disabled = true
-  
+    console.log("here")
     flatpickr(homeStart, {
       minDate: "today",
       dateFormat: "Y-m-d",
+      disableMobile: "true"
     });
   
     homeStart.addEventListener("change", (e) => {
@@ -48,7 +50,8 @@ const initFlatpickr = () => {
       }
       flatpickr(homeEnd, {
         minDate: e.target.value,
-        dateFormat: "Y-m-d"
+        dateFormat: "Y-m-d",
+        disableMobile: "true"
         });
       });
     }
