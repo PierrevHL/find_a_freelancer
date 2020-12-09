@@ -1,12 +1,14 @@
 class UserReviewsController < ApplicationController
   def new
     @user_review = UserReview.new
+    @booking = Booking.find(params[:booking_id])
   end
 
   def create
-    if @user_review.booking.status == "completed"
-      @user_review = UserReview.new(user_review_params)
-    end
+    @user_review = UserReview.new(user_review_params)
+    @booking = Booking.find(params[:booking_id])
+    @user_review.booking = @booking
+    @user_review.save!
   end
 
 

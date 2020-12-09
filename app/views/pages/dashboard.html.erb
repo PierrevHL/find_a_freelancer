@@ -16,7 +16,9 @@
 
           <div class="d-flex flex-column">
             <p><strong><%= booking.total_price %>$</strong></p>
-            <%= link_to 'Add a review', new_booking_freelancer_review_path(booking), class: "btn btn-primary"%>
+            <% if booking.status == "completed"%>
+              <%= link_to 'Add a review', new_booking_freelancer_review_path(booking), class: "btn btn-primary"%>
+            <% end %>
           </div>
         </div>
       </div>
