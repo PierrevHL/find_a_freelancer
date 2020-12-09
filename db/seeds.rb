@@ -31,6 +31,7 @@ end
 
 User.first(4).each do |user|
   user.freelancer = true
+  user.save!
   profile = Profile.create!(
     location: Faker::Nation.capital_city,
     description: Faker::Quote.famous_last_words,
