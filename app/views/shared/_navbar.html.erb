@@ -23,8 +23,8 @@
   <% end %>
 
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+  <div class="collapse navbar-collapse fixed-collapse-size" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto w-100 justify-content-end">
       <li class="nav-item active">
       <li class="nav-item">
         <% if (user_signed_in? && !current_user.profile) || !user_signed_in? %>
