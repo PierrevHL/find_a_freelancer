@@ -1,6 +1,16 @@
 
 <div class="container">
   <h2 class="row justify-content-center py-4">Freelancers</h2>
+  <%= simple_form_for :search, url: profiles_path, method: :get, html: { class: "search-form d-flex justify-content-center" } do |f| %>
+      <div class="search-form-control d-flex justify-content-center align-items-center">
+        <input class="form-control string required w-50" type="text" placeholder="$ Min Price/hour"  name="low_rate" /> -
+        <input class="form-control string required w-50" type="text" placeholder="$ Max Price/hour"  name="high_rate" />
+        <button name="button" type="submit" class="btn btn-flat">
+          <i class="fas fa-search"></i> Search
+        </button>
+      </div>
+    <% end %>
+    <br>
   <div class = "row">
     <% @profiles.each do |profile| %>
     <div class="col-lg-4" style="width: 18rem;">

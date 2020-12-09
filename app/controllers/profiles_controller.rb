@@ -5,6 +5,8 @@ class ProfilesController < ApplicationController
   def index
     search_query = params[:query]
     skill_query = params[:skill]
+    low_rate_query = params[:low_rate]
+    high_rate_query = params[:high_rate]
 
     sql_full_query = "\
       users.first_name @@ :query \
@@ -19,7 +21,11 @@ class ProfilesController < ApplicationController
     if skill_query.present?
       @profiles = @profiles.joins(profile_skills: :skill).where(sql_skill_query, skill: "%#{params[:skill]}%").distinct
     end
-    
+    if low_rate_query.present? || high_rate_query.present?
+      low_rate = low_rate_query.present? ? low_rate_query.to_i : 0
+      high_rate = high_rate_query.present? ? high_rate_query.to_i : 1000000
+      @profiles = @profiles.joins(:profile_skills).where(profile_skills: {rate: low_rate..high_rate}).distinct
+    end
 
     if params[:search].present? && params[:search][:starts_at].present?
       dates = [params[:search][:starts_at], params[:search][:ends_at]].map(&:strip).map(&:to_date)
