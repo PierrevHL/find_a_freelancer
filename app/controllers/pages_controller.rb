@@ -8,7 +8,11 @@ class PagesController < ApplicationController
 
   def dashboard
     @bookings = current_user.bookings
-    # compare booking end date with todays date (once default status has been assigned)
+    @bookings.each do |booking|
+      if booking.end_date < Time.now
+        booking.status = "completed"
+      end
+    end
     @my_bookings = Booking.where(profile: current_user.profile)
   end
 end

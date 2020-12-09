@@ -1,6 +1,8 @@
 class Booking < ApplicationRecord
   belongs_to :profile_skill
   belongs_to :user
+  has_one :freelancer_review
+  has_one :user_review
   validates :start_date, :end_date, presence: true #:start_time, :end_time,
   validate :check_booking_dates
 

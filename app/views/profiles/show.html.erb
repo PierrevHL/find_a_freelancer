@@ -49,6 +49,14 @@
       </div>
     </div>
 </div>
+
+<div class="container">
+  <% @profile.freelancer_reviews.each do |review| %>
+    <p> <%= review.booking.user.first_name %> says:</p>
+    <p> "<%= review.content %>"</p>
+    <p> Rating: <%= review.rating %></p>
+  <% end %>
+</div>
 <br>
 <br>
 <div class="container my-5">
