@@ -2,7 +2,7 @@ import "jquery-bar-rating";
 import $ from 'jquery';
 
 const initStarRating = () => {
-  $('#user_review_rating').barrating({
+  $('.barrating').barrating({
     theme: 'css-stars'
   });
 };

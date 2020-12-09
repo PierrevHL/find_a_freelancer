@@ -33,11 +33,11 @@ import { initFlatpickr } from '../plugins/flatpickr';
 import { iniTotalPrice } from '../plugins/total_price';
 import { initStarRating } from '../plugins/init_star_rating';
 
-initStarRating();
 
 document.addEventListener('turbolinks:load', () => {
   initMapbox();
   initSelect2();
   initFlatpickr();
+  initStarRating();
   iniTotalPrice();
 })

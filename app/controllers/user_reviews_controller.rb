@@ -9,6 +9,7 @@ class UserReviewsController < ApplicationController
     @booking = Booking.find(params[:booking_id])
     @user_review.booking = @booking
     @user_review.save!
+    redirect_to dashboard_path
   end
 
 
