@@ -6,14 +6,12 @@ class MessagesController < ApplicationController
   end
 
   def index
-    @messages = @conversation.messages
-      if @messages.length > 10
-       @over_ten = true
-       @messages = @messages[-10..-1]
-      end
+    @messages = @conversation.messages.order("created_at desc")
       if params[:m]
        @over_ten = false
-       @messages = @conversation.messages
+      elsif @messages.length > 10
+       @over_ten = true
+       @messages = @messages[0..10]
       end
     @message = @conversation.messages.new
   end
@@ -24,6 +22,7 @@ class MessagesController < ApplicationController
 
   def create
     @message = @conversation.messages.new(message_params)
+    # bpryinding.
     if @message.save
       redirect_to conversation_messages_path(@conversation)
     end
