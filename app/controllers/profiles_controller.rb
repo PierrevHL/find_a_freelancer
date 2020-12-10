@@ -7,7 +7,6 @@ class ProfilesController < ApplicationController
     skill_query = params[:skill]
     low_rate_query = params[:low_rate]
     high_rate_query = params[:high_rate]
-
     sql_full_query = "\
       users.first_name @@ :query \
       OR profiles.location @@ :query \
