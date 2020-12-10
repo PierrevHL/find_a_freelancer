@@ -9,6 +9,7 @@ class FreelancerReviewsController < ApplicationController
     @booking = Booking.find(params[:booking_id])
     @freelancer_review.booking = @booking
     @freelancer_review.save!
+    redirect_to dashboard_path
   end
 
 
