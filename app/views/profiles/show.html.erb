@@ -67,6 +67,9 @@
       <%= link_to "Edit profile", edit_profile_path(@profile), class:"d-block my-2 btn btn-outline-secondary" %>
       <%= link_to "Update rates", edit_rates_profile_path, class:"d-block my-2 btn btn-outline-secondary" %>
       <%= link_to "Back to list", profiles_path, class:"d-block my-2 btn  btn-outline-secondary" %>
+      <br>
+      <br>
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item d-md-none text-center" %>
     <% else %>
       <%= link_to "Back to list", profiles_path, class:"btn btn-outline-secondary" %>
     <% end %>
