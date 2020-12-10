@@ -1,19 +1,27 @@
 <nav class="navbar navbar-dark bg-info navbar-expand d-md-none d-lg-none d-xl-none fixed-bottom">
     <ul class="navbar-nav nav-justified w-100">
       <li class="nav-item">
-        <i class="fas fa-search"></i><a href="#" class="nav-link">Explore</a>
+        <i class="fas fa-search"></i>
+        <%= link_to "Explore", root_path, class: "d-block" %>
       </li>
       <li class="nav-item">
-        <i class="far fa-heart"></i><a href="#" class="nav-link">Saved</a>
+        <i class="far fa-heart"></i>
       </li>
       <li class="nav-item">
-        <i class="far fa-handshake"></i><a href="#" class="nav-link">Bookings</a>
+        <i class="far fa-handshake"></i>
+        <%= link_to "Bookings", dashboard_path, class: "d-block" %>
       </li>
       <li class="nav-item">
-        <i class="far fa-comment-alt"></i><a href="#" class="nav-link">Inbox</a>
+        <i class="far fa-comment-alt"></i>
+        <%= link_to "Inbox", conversations_path, class: "d-block" %>
       </li>
       <li class="nav-item">
-        <i class="far fa-user"></i><a href="#" class="nav-link">Profile</a>
+        <i class="far fa-user"></i>
+        <% if user_signed_in? %>
+          <%= link_to "Profile", profile_path(current_user.profile), class: "d-block" %>
+        <% else %>
+          <%= link_to "Log in", new_user_session_path, class: "d-block" %>
+        <% end %>
       </li>
     </ul>
   </nav>
