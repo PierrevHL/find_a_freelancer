@@ -9,7 +9,7 @@
     <div class="container">
       <h2 class="row justify-content-center py-4">My user bookings</h2>
       <% @bookings.each do |booking| %>
-        <div class="list_card m-4">
+        <div class="list_card mb-4">
         <%= link_to profile_path(booking.profile) do %>
           <% if booking.profile.image.attached? %>
             <%= cl_image_tag booking.profile.image.key %>
@@ -22,7 +22,7 @@
               <div>
                 <h2><%= link_to booking.profile.user.first_name, profile_path(booking.profile) %></h2>
                 <p><strong><%= booking.profile_skill.skill.name %></strong> </p>
-                <p><strong>Dates</strong> <%= booking.start_date %> - <%= booking.end_date %> </p>
+                <p><%= booking.start_date.strftime("%A, %b %d") %> <br class="linebreak">- <%= booking.end_date.strftime("%A, %b %d") %> </p>
                 <p><strong>Status</strong> <%= booking.status %></p>
               </div>
               <div class="d-flex flex-column">

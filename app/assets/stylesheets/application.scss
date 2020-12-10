@@ -87,12 +87,25 @@ img {
   width: 100px;
 }
 
+.linebreak {
+  display: none;
+}
 
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
-  .search-form-control .btn {
+  #home-search {
     top: 234px;
     right: 95px;
+  }
+
+  #price-search {
+    top: 59px;
+    right: 99px;
+  }
+
+  #navbar-search {
+    top: 9px;
+    right: -68px;
   }
 
   .search-form-control {
@@ -108,5 +121,15 @@ img {
     .mt-sm-3 {
       margin-top: 29px;
     }
+  }
+
+  .linebreak {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #profile-edit-btn{
+    flex-direction: column !important
   }
 }

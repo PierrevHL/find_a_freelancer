@@ -5,24 +5,25 @@
       <div class="search-form-control d-flex justify-content-center align-items-center">
         <input class="form-control string required w-50" type="text" placeholder="$ Min Price/hour"  name="low_rate" /> -
         <input class="form-control string required w-50" type="text" placeholder="$ Max Price/hour"  name="high_rate" />
-        <button name="button" type="submit" class="btn btn-flat">
+        <button name="button" type="submit" class="btn btn-flat" id="price-search">
           <i class="fas fa-search"></i> Search
         </button>
       </div>
     <% end %>
     <br>
     <br>
-  <div class = "row">
+    <br>
+  <div class = "row d-md-flex justify-content-center align-items-center">
     <% @profiles.each do |profile| %>
-    <div class="col-lg-4" style="width: 18rem;">
+    <div class="col-lg-4" style="width: 23rem;">
       <div class="freelancer-card">
         <% if profile.image.attached?  %>
           <%= link_to profile_path(profile) do %>
-            <%= cl_image_tag profile.image.key, height: 350, width: 400, crop: :fill %>
+            <%= cl_image_tag profile.image.key, height: 225, width: 400, crop: :fill %>
           <% end %>
         <% else %>
           <%= link_to profile_path(profile) do %>
-            <%= image_tag "https://picsum.photos/1000" , class: "some css class here" %>
+            <%= image_tag "https://picsum.photos/1000" , height: 225, class: "some css class here" %>
           <% end %>
         <% end %>
         <div class="card-body">

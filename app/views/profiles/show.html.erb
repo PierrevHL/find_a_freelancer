@@ -3,13 +3,14 @@
   <div class="row">
     <div class="col-md-4">
       <% if @profile.image.attached?  %>
-        <%= cl_image_tag @profile.image.key, height: 350, width: 400, crop: :fill %>
+        <%= cl_image_tag @profile.image.key, height: 275, width: 400, crop: :fill %>
       <% else %>
-          <img src="https://picsum.photos/1000" alt="">
+          <img height="275" src="https://picsum.photos/1000" alt="">
       <% end %>
     </div>
 
     <div class="col-md-4">
+      <br>
       <h2><%= @profile.user.first_name.capitalize %></h2>
       <br>
       <h3><%= @profile.description %></h3>
@@ -23,6 +24,7 @@
 
       <br>
       <p><%= @profile.location %></p>
+      <br>
     </div>
 
     <div class="col-md-4">
@@ -60,11 +62,11 @@
 <br>
 <br>
 <div class="container my-5">
-  <div class="d-flex justify-content-around mx-5 px-5">
+  <div  id="profile-edit-btn" class="d-flex flex--column justify-content-around">
     <% if @profile.user == current_user %>
-      <%= link_to "Edit profile", edit_profile_path(@profile), class:"btn btn-outline-secondary" %>
-      <%= link_to "Update rates", edit_rates_profile_path, class:"btn btn-outline-secondary" %>
-      <%= link_to "Back to list", profiles_path, class:"btn btn-outline-secondary" %>
+      <%= link_to "Edit profile", edit_profile_path(@profile), class:"d-block my-2 btn btn-outline-secondary" %>
+      <%= link_to "Update rates", edit_rates_profile_path, class:"d-block my-2 btn btn-outline-secondary" %>
+      <%= link_to "Back to list", profiles_path, class:"d-block my-2 btn  btn-outline-secondary" %>
     <% else %>
       <%= link_to "Back to list", profiles_path, class:"btn btn-outline-secondary" %>
     <% end %>
