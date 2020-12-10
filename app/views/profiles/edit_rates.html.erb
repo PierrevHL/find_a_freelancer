@@ -1,12 +1,27 @@
-<% @profile.profile_skills.each do |profile_skill| %>
-  <%= simple_form_for profile_skill do |f| %>
-  <div class="d-flex align-items-center">
-    <%= f.input :skill, input_html: { value: profile_skill.skill.name, disabled: true } %>
-    <%= f.input :rate %>
-    <%= f.submit "Set Rate" %>
-  </div>
+<div class="container">
+  <% @profile.profile_skills.each do |profile_skill| %>
+    <%= simple_form_for profile_skill, remote: true do |f| %>
+      <div class="row align-items-end">
+        <div class="px-1 col-6">
+          <%= f.input :skill, input_html: { value: profile_skill.skill.name, disabled: true } %>
+        </div>
+        <div class="px-1 col-3">
+          <%= f.input :rate %>
+        </div>
+        <div class="px-0 col-3">
+          <div class="set-button">
+            <%= f.submit "Set", class: "mb-3" %>
+            <%= link_to profile_skill_path(profile_skill), method: :delete, data: { confirm: "Are you sure?" } do %>
+              <i class="fas fa-times"></i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>
 <br>
 <br>
 <%= link_to "Back to profile", profile_path(current_user.profile), class:"btn btn-outline-secondary" %>
+
+</div>
