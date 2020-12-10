@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :profile_skills, except: [:destroy] do
+  resources :profile_skills do
   end
 
   resources :bookings, only: [:create] do
