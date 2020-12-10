@@ -1,0 +1,27 @@
+.conv-card{
+  display: flex;
+  padding: 14px 0px;
+  border-bottom: 1px solid #8080804d;
+  .img{
+    padding: 8px 8px;
+    .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+  }
+  .content{
+    flex: 1;
+    padding: 0px 8px;
+    h5, p{
+      margin: 0px;
+      p.card-date{
+        color: $medium-grey !important;
+      }
+    }
+  }
+
+}
+
+
+
