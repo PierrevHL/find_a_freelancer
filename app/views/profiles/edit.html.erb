@@ -7,16 +7,23 @@
   <%= f.input :location %>
   <%= f.input :description %>
   <%= f.input :location_specific %>
+  <br>
   <%= f.input :image, as: :file %>
+  <br>
   <%= f.submit %>
 <% end %>
-
+<br>
+<br>
 <% @profile.profile_skills.each do |profile_skill| %>
   <%= simple_form_for profile_skill do |f| %>
   <div class="d-flex align-items-center">
     <%= f.input :skill, input_html: { value: profile_skill.skill.name, disabled: true } %>
     <%= f.input :rate %>
-    <%= f.submit "Set Rate" %>
+    <%= f.submit "Set" %>
   </div>
   <% end %>
 <% end %>
+<br>
+<br>
+<%= link_to "Back to profile", profile_path(current_user.profile), class:"btn btn-outline-secondary" %>
+
