@@ -2,29 +2,39 @@
 <div class="container">
   <h2 class="row justify-content-center py-4">Freelancers</h2>
   <%= simple_form_for :search, url: profiles_path, method: :get, html: { class: "search-form d-flex justify-content-center" } do |f| %>
-      <div class="search-form-control d-flex justify-content-center align-items-center">
-        <input class="form-control string required w-50" type="text" placeholder="$ Min Price/hour"  name="low_rate" /> -
-        <input class="form-control string required w-50" type="text" placeholder="$ Max Price/hour"  name="high_rate" />
-        <button name="button" type="submit" class="btn btn-flat" id="price-search">
-          <i class="fas fa-search"></i> Search
-        </button>
-      </div>
-    <% end %>
-    <br>
-    <br>
-    <br>
+    <div class="search-form-control d-flex justify-content-center align-items-center">
+      <input class="form-control string required w-50" type="text" placeholder="Skill"  name="skill" value="<%= params[:skill] %>" />
+      <input class="form-control string required w-50" type="text" placeholder="Location/ Name/..." name="query" value="<%= params[:query] %>" />
+      <%= f.input :starts_at, as: :string, required: false, input_html: {class: "datepicker", placeholder: "From"}, wrapper_html: { class: "mb-0 w-25"}, label: false %>
+      <%= f.input :ends_at, as: :string, required: false, input_html: {class: "datepicker", placeholder: "Until"}, wrapper_html: { class: "mb-0 w-25"}, label: false %>
+      <button name="button" type="submit" class="btn btn-flat" id="navbar-search">
+        <i class="fas fa-search"></i> Search
+      </button>
+    </div>
+
+    <div class="search-form-control d-flex justify-content-center align-items-center">
+      <input class="form-control string required w-50" type="text" placeholder="$ Min Price/hour"  name="low_rate" value="<%= params[:low_rate] %>" />
+      <input class="form-control string required w-50" type="text" placeholder="$ Max Price/hour"  name="high_rate" value="<%= params[:high_rate] %>" />
+      <button name="button" type="submit" class="btn btn-flat" id="price-search">
+        <i class="fas fa-search"></i> Search
+      </button>
+    </div>
+  <% end %>
+  <br>
+  <br>
+  <br>
   <div class = "row d-md-flex justify-content-center align-items-center">
     <% @profiles.each do |profile| %>
     <div class="col-lg-4" style="width: 23rem;">
       <div class="freelancer-card">
         <% if profile.image.attached?  %>
-          <%= link_to profile_path(profile) do %>
-            <%= cl_image_tag profile.image.key, height: 225, width: 400, crop: :fill %>
-          <% end %>
+        <%= link_to profile_path(profile) do %>
+        <%= cl_image_tag profile.image.key, height: 225, width: 400, crop: :fill %>
+        <% end %>
         <% else %>
-          <%= link_to profile_path(profile) do %>
-            <%= image_tag "https://picsum.photos/1000" , height: 225, class: "some css class here" %>
-          <% end %>
+        <%= link_to profile_path(profile) do %>
+        <%= image_tag "https://picsum.photos/1000" , height: 225, class: "some css class here" %>
+        <% end %>
         <% end %>
         <div class="card-body">
           <h5 class="card-title"><%= link_to profile.user.first_name.capitalize, profile_path(profile) %></h5>
