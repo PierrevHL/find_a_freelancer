@@ -15,7 +15,7 @@ class ProfilesController < ApplicationController
     sql_skill_query = "skills.name @@ :skill"
     @profiles = Profile.all
 
-    if search_query.present? 
+    if search_query.present?
       @profiles = Profile.joins(:user).where(sql_full_query, query: "%#{params[:query]}%").distinct
     end
     if skill_query.present?
@@ -69,6 +69,9 @@ class ProfilesController < ApplicationController
 
   def update
     if @profile.update(profile_params)
+      params[:profile][:skills][1..-1].each do |skill|
+        ProfileSkill.create!(profile: @profile, skill_id: skill)
+      end
       redirect_to profile_path(@profile)
     else
       render :new
