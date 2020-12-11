@@ -26,11 +26,20 @@
     <% end %>
 
     <% if user_signed_in? %>
-      <%= link_to profile_path(current_user.profile) do %>
-        <li class="nav-item d-flex flex-column">
-          <i class="far fa-user"></i>
-          <span>Profile</span>
-        </li>
+      <% if current_user.freelancer? %>
+        <%= link_to profile_path(current_user.profile) do %>
+          <li class="nav-item d-flex flex-column">
+            <i class="far fa-user"></i>
+            <span>Profile</span>
+          </li>
+        <% end %>
+      <% else %>
+        <%= link_to user_path(current_user) do %>
+          <li class="nav-item d-flex flex-column">
+            <i class="far fa-user"></i>
+            <span>Profile</span>
+          </li>
+        <% end %>
       <% end %>
     <% else %>
       <%= link_to new_user_session_path do %>
