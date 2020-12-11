@@ -27,7 +27,7 @@
 
     <% if user_signed_in? %>
       <% if current_user.freelancer? %>
-        <%= link_to profile_path(current_user.profile) do %>
+        <%= link_to profile_path(current_user.profile), class:"navbar-link" do %>
           <li class="nav-item d-flex flex-column">
             <i class="far fa-user"></i>
             <span>Profile</span>
