@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :bookings
   has_one :profile
+  has_one_attached :image
   has_many :conversations
   validates :email, presence: true
 end
