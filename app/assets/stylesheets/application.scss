@@ -28,8 +28,12 @@ a.custom-card:hover {
 }
 
 a{
-  color: $green;
+  color: $dark-green;
   padding: 4px;
+}
+
+.btn-green {
+  color: $dark-green;
 }
 
 input.mb-3{
@@ -85,6 +89,7 @@ img {
   display: none;
 }
 
+
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
   #home-search {
@@ -95,6 +100,9 @@ img {
   #price-search {
     top: 59px;
     right: 99px;
+    align: center;
+    margin: 0 auto;
+    display: block;
   }
 
   #navbar-search {
@@ -120,6 +128,7 @@ img {
   .linebreak {
     display: block;
   }
+  
 }
 
 @media only screen and (max-width: 768px) {
