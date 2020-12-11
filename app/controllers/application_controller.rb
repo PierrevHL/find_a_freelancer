@@ -9,10 +9,10 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :username])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :image])
 
     # For additional in app/views/devise/registrations/edit.html.erb
-    devise_parameter_sanitizer.permit(:account_update, keys: [:username])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:image])
   end
 
   def set_booking_session
@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
       session[:end_date] = params[:booking][:end_date]
       session[:profile_skill] = params[:booking][:profile_skill]
     elsif request.referer && !request.referer.match(/users/) && !devise_controller?
-      session[:start_date] = nil 
+      session[:start_date] = nil
       session[:end_date] = nil
       session[:profile_skill] = nil
     end
@@ -30,11 +30,11 @@ class ApplicationController < ActionController::Base
   private
   # Its important that the location is NOT stored if:
   # - The request method is not GET (non idempotent)
-  # - The request is handled by a Devise controller such as Devise::SessionsController as that could cause an 
+  # - The request is handled by a Devise controller such as Devise::SessionsController as that could cause an
   #    infinite redirect loop.
   # - The request is an Ajax request as this can lead to very unexpected behaviour.
   def storable_location?
-    request.get? && is_navigational_format? && !devise_controller? && !request.xhr? 
+    request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
   end
 
   def store_user_location!
