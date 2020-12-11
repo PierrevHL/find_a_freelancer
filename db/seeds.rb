@@ -15,21 +15,26 @@ Profile.destroy_all
 User.destroy_all
 
 puts "Database claned"
-skill = ["Photographer", "Programmer", "UX Designer", "Cleaner", "Plumber", "Electrical technician", "Tutor", "Translator", "Driver", "Gardener", "Model"]
+skill = ["Photographer", "Programmer", "UX designer", "Cleaner", "Plumber", "Electrical technician", "Tutor", "Translator", "Driver", "Gardener", "Model", "Writer", "Editor", "Bookkeeper", "Coach", "Cook", "Graphic designer", "Personal trainer"]
 
 skill.each {|skill| Skill.create(name: skill)}
 
-20.times do
+50.times do
   User.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
     password: "123123",
   )
+
+  keyword = ["woman", "person", "man"].sample
+  file = URI.open("https://source.unsplash.com/800x600/?#{keyword}")
+  user.image.attach(io: file, filename: "#{user.first_name}.jpg", content_type: 'image/png')
+
   puts "#{User.count} users created"
 end
 
-User.first(4).each do |user|
+User.first(25).each do |user|
   user.freelancer = true
   user.save!
   profile = Profile.create!(
@@ -53,14 +58,25 @@ Profile.first(10).each do |profile|
   profile.save!
 end
 
-5.times do
+40.times do
   start =  Date.today + rand(30..40)
-  Booking.create(
+  booking = Booking.create(
     start_date: start,
     end_date: start + rand(2..3),
     user: User.all.sample,
-    profile_skill: ProfileSkill.all.sample,
+    profile_skill: ProfileSkill.all.sample
   )
+  FreelancerReview.create(
+    booking: booking,
+    rating: rand(2..5),
+    content: Faker::Quote.famous_last_words
+    )
+  UserReview.create(
+    booking: booking,
+    rating: rand(2..5),
+    content: Faker::Quote.famous_last_words
+    )
+
   puts "#{Booking.count} bookings created"
 end
 
