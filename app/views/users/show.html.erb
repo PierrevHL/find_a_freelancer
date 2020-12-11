@@ -7,3 +7,6 @@
     <p class="card-date">Joined in <%= current_user.created_at.strftime("%B %Y") %></p>
   </div>
 </div>
+<% if (user_signed_in? && !current_user.profile) || !user_signed_in? %>
+  <%= link_to "Join the network and become a freelancer yourself!", new_profile_path, class:"btn btn-green" %>
+<% end %>
