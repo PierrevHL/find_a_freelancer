@@ -9,7 +9,8 @@
 require "open-uri"
 
 puts "Cleaning database"
-
+UserReview.destroy_all
+FreelancerReview.destroy_all
 Booking.destroy_all
 Profile.destroy_all
 User.destroy_all
@@ -20,7 +21,7 @@ skill = ["Photographer", "Programmer", "UX designer", "Cleaner", "Plumber", "Ele
 skill.each {|skill| Skill.create(name: skill)}
 
 50.times do
-  User.create!(
+  user = User.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
@@ -60,23 +61,25 @@ end
 
 40.times do
   start =  Date.today + rand(30..40)
-  booking = Booking.create(
+  booking = Booking.new(
     start_date: start,
     end_date: start + rand(2..3),
     user: User.all.sample,
     profile_skill: ProfileSkill.all.sample
   )
-  FreelancerReview.create(
-    booking: booking,
-    rating: rand(2..5),
-    content: Faker::Quote.famous_last_words
-    )
-  UserReview.create(
-    booking: booking,
-    rating: rand(2..5),
-    content: Faker::Quote.famous_last_words
-    )
 
+  if booking.save
+    FreelancerReview.create(
+      booking: booking,
+      rating: rand(2..5),
+      content: Faker::Quote.famous_last_words
+      )
+    UserReview.create(
+      booking: booking,
+      rating: rand(2..5),
+      content: Faker::Quote.famous_last_words
+      )
+    end
   puts "#{Booking.count} bookings created"
 end
 
