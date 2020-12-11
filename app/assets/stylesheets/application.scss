@@ -17,6 +17,16 @@
 
 @import "jquery-bar-rating/dist/themes/css-stars";
 
+.ui.reply.form{
+  margin: 0px;
+  margin-top: 20px;
+}
+
+a.custom-card,
+a.custom-card:hover {
+  color: inherit;
+}
+
 a{
   color: $green;
   padding: 4px;

@@ -4,16 +4,18 @@
     <div class="item">
       <% @conversations.each do |conversation| %>
         <% if conversation.messages.any?%>
-        <div class="conv-card">
-            <div class="img">
-              <img class="avatar" src="https://source.unsplash.com/800x600/?worker" alt="">
+          <a href= "<%= conversation_messages_path(conversation) %>" class="custom-card">
+            <div class="conv-card">
+              <div class="img">
+                <img class="avatar" src="https://source.unsplash.com/800x600/?worker" alt="">
+              </div>
+              <div class="content">
+                <h5 class="card-title"><%= conversation.contact.first_name %></h5>
+                <p><%= conversation.messages.last.content.truncate(35) %></p>
+                <p class="card-date"><%= conversation.messages.last.created_at.strftime("%A, %b %d") %></p>
+              </div>
             </div>
-            <div class="content">
-              <h5 class="card-title"><%= conversation.contact.first_name %></h5>
-              <p><%= conversation.messages.last.content.truncate(35) %></p>
-              <p class="card-date"><%= conversation.messages.last.created_at.strftime("%A, %b %d") %></p>
-            </div>
-          </div>
+          </a>
         <% end %>
       <% end %>
     </div>
