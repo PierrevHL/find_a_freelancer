@@ -20,6 +20,6 @@ class Profile < ApplicationRecord
   end
 
   def update_user
-    user.update(freelancer: true)
+    self.user.update(freelancer: true)
   end
 end

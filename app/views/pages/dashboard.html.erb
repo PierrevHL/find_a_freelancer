@@ -1,8 +1,10 @@
 <h3 class="text-center py-4">Bookings</h3>
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="true">User bookings</a>
-    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-freelancer" role="tab" aria-controls="nav-freelancer" aria-selected="false">Freelancer bookings</a>
+    <% if (user_signed_in? && current_user.profile) || !user_signed_in? %>
+      <a class="nav-item nav-link active" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="true">User bookings</a>
+      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-freelancer" role="tab" aria-controls="nav-freelancer" aria-selected="false">Freelancer bookings</a>
+    <% end %>
   </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">

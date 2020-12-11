@@ -32,6 +32,24 @@ a{
   padding: 4px;
 }
 
+.btn{
+  &:active{
+    background-color: $dark-green;
+    border: none;
+    color: #fff!important;
+
+    outline: none;
+  }
+
+  &:focus{
+    background-color: $dark-green;
+    border: none;
+    color: #fff!important;
+
+    outline: none;
+  }
+}
+
 .btn-green {
   color: $dark-green;
 }
