@@ -6,12 +6,12 @@ class MessagesController < ApplicationController
   end
 
   def index
-    @messages = @conversation.messages.order("created_at desc")
+    @messages = @conversation.messages.order("created_at")
       if params[:m]
        @over_ten = false
       elsif @messages.length > 10
        @over_ten = true
-       @messages = @messages[0..10]
+       @messages = @messages[-10..-1]
       end
     @message = @conversation.messages.new
   end
