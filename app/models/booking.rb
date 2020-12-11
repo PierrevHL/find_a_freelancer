@@ -1,5 +1,6 @@
 class Booking < ApplicationRecord
   belongs_to :profile_skill
+  has_one :profile, through: :profile_skill
   belongs_to :user
   has_one :freelancer_review
   has_one :user_review
