@@ -42,8 +42,8 @@ User.first(4).each do |user|
   file = URI.open("https://source.unsplash.com/800x600/?#{keyword}")
   profile.image.attach(io: file, filename: "#{profile.user.first_name}.jpg", content_type: 'image/png')
 
-  rand(1..3).times do
-    ProfileSkill.create!(profile_id: profile.id, skill: Skill.all.sample, rate: rand(50..100))
+  rand(1..5).times do
+    ProfileSkill.create(profile_id: profile.id, skill: Skill.all.sample, rate: rand(50..100))
   end
   puts "#{Profile.count} profiles created"
 end
