@@ -1,13 +1,13 @@
+<h3 class="text-center py-4">Bookings</h3>
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="true">My user bookings</a>
-    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-freelancer" role="tab" aria-controls="nav-freelancer" aria-selected="false">My freelancer bookings</a>
+    <a class="nav-item nav-link active" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="true">User bookings</a>
+    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-freelancer" role="tab" aria-controls="nav-freelancer" aria-selected="false">Freelancer bookings</a>
   </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
     <div class="container">
-      <h2 class="row justify-content-center py-4">My user bookings</h2>
       <% @bookings.each do |booking| %>
         <div class="list_card mb-4">
         <%= link_to profile_path(booking.profile) do %>
@@ -39,7 +39,6 @@
   </div>
   <div class="tab-pane fade" id="nav-freelancer" role="tabpanel" aria-labelledby="nav-freelancer-tab">
     <div class="container">
-      <h2 class="row justify-content-center py-4">My freelancer bookings</h2>
       <% @freelancer_bookings.each do |booking| %>
         <div class="list_card m-4">
           <div class="list_card-info w-100">
