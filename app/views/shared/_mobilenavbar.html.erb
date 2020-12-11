@@ -1,27 +1,46 @@
-<nav class="navbar navbar-dark bg-info navbar-expand d-md-none d-lg-none d-xl-none fixed-bottom">
-    <ul class="navbar-nav nav-justified w-100">
-      <li class="nav-item">
+<nav class="navbar navbar-dark bg-white navbar-expand d-md-none d-lg-none d-xl-none fixed-bottom background-color: #white !important">
+    <ul class="navbar-nav nav-justified w-100 justify-content-between">
+    <%= link_to root_path, class:"navbar-link #{'active' if  controller_name == 'pages' && action_name == 'home' }" do %>
+      <li class="nav-item d-flex flex-column">
         <i class="fas fa-search"></i>
-        <%= link_to "Explore", root_path, class: "d-block" %>
+        <span>Explore</span>
       </li>
-      <li class="nav-item">
+    <% end %>
+    <%= link_to dashboard_path, class:"navbar-link" do %>
+      <li class="nav-item d-flex flex-column">
         <i class="far fa-heart"></i>
+        <span>Saved</span>
       </li>
-      <li class="nav-item">
+    <% end %>
+    <%= link_to dashboard_path, class:"navbar-link" do %>
+      <li class="nav-item d-flex flex-column">
         <i class="far fa-handshake"></i>
-        <%= link_to "Bookings", dashboard_path, class: "d-block" %>
+        <span>Bookings</span>
       </li>
-      <li class="nav-item">
+    <% end %>
+    <%= link_to conversations_path, class:"navbar-link" do %>
+      <li class="nav-item d-flex flex-column">
         <i class="far fa-comment-alt"></i>
-        <%= link_to "Inbox", conversations_path, class: "d-block" %>
+        <span>Inbox</span>
       </li>
-      <li class="nav-item">
-        <i class="far fa-user"></i>
-        <% if user_signed_in? %>
-          <%= link_to "Profile", profile_path(current_user.profile), class: "d-block" %>
-        <% else %>
-          <%= link_to "Log in", new_user_session_path, class: "d-block" %>
-        <% end %>
-      </li>
+    <% end %>
+
+    <% if user_signed_in? %>
+      <%= link_to profile_path(current_user.profile) do %>
+        <li class="nav-item d-flex flex-column">
+          <i class="far fa-user"></i>
+          <span>Profile</span>
+        </li>
+      <% end %>
+    <% else %>
+      <%= link_to new_user_session_path do %>
+        <li class="nav-item d-flex flex-column">
+          <i class="far fa-user"></i>
+          <span>Log in</span>
+        </li>
+      <% end %>
+    <% end %>
+
+
     </ul>
   </nav>
