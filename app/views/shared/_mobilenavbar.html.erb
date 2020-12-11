@@ -34,7 +34,7 @@
           </li>
         <% end %>
       <% else %>
-        <%= link_to user_path(current_user) do %>
+        <%= link_to user_path(current_user), class:"navbar-link" do %>
           <li class="nav-item d-flex flex-column">
             <i class="far fa-user"></i>
             <span>Profile</span>
@@ -42,7 +42,7 @@
         <% end %>
       <% end %>
     <% else %>
-      <%= link_to new_user_session_path do %>
+      <%= link_to new_user_session_path, class:"navbar-link" do %>
         <li class="nav-item d-flex flex-column">
           <i class="far fa-user"></i>
           <span>Log in</span>
