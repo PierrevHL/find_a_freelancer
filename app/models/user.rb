@@ -8,4 +8,5 @@ class User < ApplicationRecord
   has_one_attached :image
   has_many :conversations
   validates :email, presence: true
+  validates :email, uniqueness: true
 end
