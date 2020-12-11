@@ -1,7 +1,9 @@
-
-<h2><%= current_user.first_name.capitalize %></h2>
-
-<img class="avatar" src="https://source.unsplash.com/800x600/?worker" alt="">
-
-<p><%= current_user.email %></p>
-
+<div class="conv-card">
+  <div class="img">
+    <img class="avatar" src="https://source.unsplash.com/800x800/?worker" alt="">
+  </div>
+  <div class="content">
+    <h3 class="card-title"><%= current_user.first_name.capitalize %></h3>
+    <p class="card-date">Joined in <%= current_user.created_at.strftime("%B %Y") %></p>
+  </div>
+</div>
