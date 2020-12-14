@@ -42,6 +42,7 @@ class ProfilesController < ApplicationController
 
   def show
     @booking = Booking.new
+    likes = @profile.favoritors.count
   end
 
   def new
