@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :profile_skills do
   end
 
-  resources :bookings, only: [:create] do
+  resources :bookings, only: [:create, :update] do
     resources :user_reviews, only: [:index, :new, :create]
     resources :freelancer_reviews, only: [:index, :new, :create]
   end

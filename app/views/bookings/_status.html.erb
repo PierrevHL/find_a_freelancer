@@ -1,0 +1,39 @@
+<!-- Modal -->
+<div class="modal fade" id="status-modal-<%= booking.id %>" tabindex="-1" aria-labelledby="status-modal-<%= booking.id %>Label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="status-modal-<%= booking.id %>Label">Booking request</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <% if booking.status == "pending" && current_user == booking.profile_skill.profile.user %>
+          <%= link_to "Confirm", booking_path(booking, booking: { status: "confirmed" }), method: :patch %>
+          <%= link_to "Reject", booking_path(booking, booking: { status: "rejected" }), method: :patch, data: { confirm: "Are you sure you want to reject the booking? You won't be able to see the booking anymore once rejected!"} %>
+        <% elsif booking.status == "confirmed" %>
+        <br>
+        <br>
+          <% if booking.status == "confirmed" && current_user == booking.profile_skill.profile.user %>
+            <p><strong>Congrats!</strong> <%= booking.user.first_name %> is expecting you from <%= booking.start_date.strftime("%A, %b %d") %> - <%= booking.end_date.strftime("%A, %b %d") %>! :)</p>
+            <p>Go ahead and get in touch with <%= booking.user.first_name %> via mail or just send him a message here directly!</p>
+            <p><%= booking.user.email %></p>
+          <% else%>
+            <p><strong>Congrats!</strong> <%= booking.profile.user.first_name %> will be there for you from <%= booking.start_date.strftime("%A, %b %d") %> - <%= booking.end_date.strftime("%A, %b %d") %>! :)</p>
+            <p>Go ahead and get in touch with <%= booking.profile.user.first_name %> via mail or just send him a message here directly!</p>
+            <p><%= booking.user.email %></p>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <% if booking.status == "pending" && current_user == booking.profile_skill.profile.user %>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        <% elsif booking.status == "confirmed" %>
+          <p><%= link_to 'Send a message', conversations_path(sender_id: current_user.id, receiver_id: booking.user.id), method: 'post', class:"btn btn-primary" %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
