@@ -2,6 +2,8 @@ class FreelancerReviewsController < ApplicationController
   def new
     @freelancer_review = FreelancerReview.new
     @booking = Booking.find(params[:booking_id])
+
+    redirect_to dashboard_path if @booking.freelancer_review
   end
 
   def create

@@ -8,5 +8,4 @@ class FreelancerReview < ApplicationRecord
     average = reviews.pluck(:rating).sum  / reviews.size
     self.profile.update(rating: average)
   end
-
 end
