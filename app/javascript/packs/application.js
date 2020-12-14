@@ -32,6 +32,7 @@ import { initSelect2 } from '../plugins/init_select2';
 import { initFlatpickr } from '../plugins/flatpickr';
 import { iniTotalPrice } from '../plugins/total_price';
 import { initStarRating } from '../plugins/init_star_rating';
+import { profileLinks } from '../dom/profile_link';
 
 
 document.addEventListener('turbolinks:load', () => {
@@ -40,4 +41,5 @@ document.addEventListener('turbolinks:load', () => {
   initFlatpickr();
   initStarRating();
   iniTotalPrice();
+  profileLinks();
 })
