@@ -5,10 +5,15 @@ class PagesController < ApplicationController
   def home
   end
 
+  def saved
+  end
+
 
   def dashboard
     @bookings = current_user.bookings
     update_bookings(@bookings)
+  
+    
     @my_bookings = Booking.where(profile: current_user.profile)
     @freelancer_bookings = Booking.joins(profile_skill: :profile).where(profiles: {user_id: current_user.id})
   end

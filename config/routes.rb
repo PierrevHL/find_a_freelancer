@@ -23,5 +23,6 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :destroy]
 
   get "/dashboard", to: "pages#dashboard"
+  get "/saved", to: "pages#saved"
 end
 
