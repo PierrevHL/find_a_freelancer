@@ -25,7 +25,7 @@
     <% @profiles.each do |profile| %>
     <div class="col-lg-4" style="width: 23rem;">
       <div class="freelancer-card">
-        <div class="profile-img" style="background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2)), url('<%= profile.image.attached? ? cl_image_path(profile.image.key, height: 275, width: 400, crop: :fill)  : 'https://source.unsplash.com/800x600'%>')">
+        <div class="profile-img" data-profile-url="<%= profile_path(profile) %>" style="background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2)), url('<%= profile.image.attached? ? cl_image_path(profile.image.key, height: 275, width: 400, crop: :fill)  : 'https://source.unsplash.com/800x600'%>')">
           <% if current_user.favorited?(profile) %>
             <%=  link_to unfavorite_profile_path(profile), method:"post" do %>
               <i class="fas fa-heart"></i>
