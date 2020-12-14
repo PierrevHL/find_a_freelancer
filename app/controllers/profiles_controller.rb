@@ -82,12 +82,12 @@ class ProfilesController < ApplicationController
 
   def add_favorite
     current_user.favorite(@profile)
-    redirect_to profile_path(@profile)
+    redirect_to request.referrer
   end
 
   def unfavorite
     current_user.unfavorite(@profile)
-    redirect_to profile_path(@profile)
+    redirect_to request.referrer
   end
 
   private
