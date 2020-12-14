@@ -15,7 +15,7 @@ class PagesController < ApplicationController
   
     
     @my_bookings = Booking.where(profile: current_user.profile)
-    @freelancer_bookings = Booking.joins(profile_skill: :profile).where(profiles: {user_id: current_user.id})
+    @freelancer_bookings = Booking.joins(profile_skill: :profile).where(profiles: {user_id: current_user.id}).where.not(status: "rejected")
   end
 
   private
