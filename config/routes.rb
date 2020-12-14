@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :profiles, except: [:destroy] do
     member do
       get :edit_rates
+      post :add_favorite
+      post :unfavorite
     end
   end
 

@@ -10,3 +10,16 @@ p.card-date {
   color: $medium-grey;
   text-align-last: right;
 }
+
+.profile-img{
+  border-radius: 17px;
+  height: 200px;
+  position: relative;
+  i{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 27px;
+  }
+}
+

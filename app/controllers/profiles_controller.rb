@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show, :edit, :update]
-  before_action :set_profile, only: [:edit, :update, :show, :edit_rates]
+  before_action :set_profile, only: [:edit, :update, :show, :edit_rates, :add_favorite, :unfavorite]
 
   def index
     search_query = params[:query]
@@ -42,7 +42,6 @@ class ProfilesController < ApplicationController
 
   def show
     @booking = Booking.new
-    likes = @profile.favoritors.count
   end
 
   def new
@@ -81,6 +80,15 @@ class ProfilesController < ApplicationController
   def edit_rates
   end
 
+  def add_favorite
+    current_user.favorite(@profile)
+    redirect_to profile_path(@profile)
+  end
+
+  def unfavorite
+    current_user.unfavorite(@profile)
+    redirect_to profile_path(@profile)
+  end
 
   private
 
