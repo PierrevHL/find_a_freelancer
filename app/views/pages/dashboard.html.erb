@@ -28,15 +28,17 @@
           <% end %>
         <% end %>
           <div class="list_card-info w-100">
-            <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-between">
               <div>
                 <h2><%= link_to booking.profile.user.first_name, profile_path(booking.profile) %></h2>
-                <p><strong><%= booking.profile_skill.skill.name %></strong> </p>
-                <p><%= booking.start_date.strftime("%A, %b %d") %> <br class="linebreak">- <%= booking.end_date.strftime("%A, %b %d") %> </p>
-                <p><strong>Status</strong> <%= booking.status %></p>
+                <p class="mb-1"><strong><%= booking.profile_skill.skill.name %></strong> </p>
+                <p class="mb-1"><%= booking.start_date.strftime("%A, %b %d") %> <br class="linebreak">- <%= booking.end_date.strftime("%A, %b %d") %> </p>
+                <p class="mb-1"><strong>Status</strong> <%= booking.status %></p>
               </div>
-              <div class="d-flex flex-column">
-                <p><strong><%= booking.total_price %>$</strong></p>
+              <div class="d-flex flex-column justify-content-between align-items-end">
+                <p><i class="fas fa-info-circle"></i></p>
+                <p class="mt-0"><strong><%= booking.total_price %>$</strong></p>
+                <div style="height: 12px;"></div>
               </div>
             </div>
           </div>
@@ -64,15 +66,17 @@
             <% end %>
           <% end %>
           <div class="list_card-info w-100">
-            <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-between">
               <div>
                 <h2><%= booking.user.first_name %><%= " " %>booked:</h2>
-                <p><strong><%= booking.profile_skill.skill.name %></strong> </p>
-                <p><%= booking.start_date.strftime("%A, %b %d") %> <br class="linebreak">- <%= booking.end_date.strftime("%A, %b %d") %> </p>
-                <p><strong>Status</strong> <%= booking.status %></p>
-              </div>
-              <div class="d-flex flex-column">
-                <p><strong><%= booking.total_price %>$</strong></p>
+                <p class="mb-1"><strong><%= booking.profile_skill.skill.name %></strong> </p>
+                <p class="mb-1"><%= booking.start_date.strftime("%A, %b %d") %> <br class="linebreak">- <%= booking.end_date.strftime("%A, %b %d") %> </p>
+                <p class="mb-1"><strong>Status</strong> <%= booking.status %></p>
+              </div>  
+              <div class="d-flex flex-column justify-content-between align-items-end">
+                <p><i class="fas fa-info-circle"></i></p>
+                <p class="mt-0"><strong><%= booking.total_price %>$</strong></p>
+                <div style="height: 12px;"></div>
               </div>
             </div>
           </div>
