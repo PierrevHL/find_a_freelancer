@@ -9,4 +9,5 @@ class User < ApplicationRecord
   has_many :conversations
   validates :email, presence: true
   validates :email, uniqueness: true
+  acts_as_favoritor
 end
