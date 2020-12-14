@@ -2,16 +2,28 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <% if @profile.image.attached?  %>
-        <%= cl_image_tag @profile.image.key, height: 275, width: 400, crop: :fill %>
-      <% else %>
-          <img height="275" src="https://picsum.photos/1000" alt="">
-      <% end %>
+      <div class="profile-img" style="background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2)), url('<%= @profile.image.attached? ? cl_image_path(@profile.image.key, height: 275, width: 400, crop: :fill)  : 'https://source.unsplash.com/800x600'%>')">
+        <% if current_user.favorited?(@profile) %>
+          <%=  link_to unfavorite_profile_path(@profile), method:"post" do %>
+            <i class="fas fa-heart"></i>
+          <% end %>
+        <% else %>
+          <%=  link_to add_favorite_profile_path(@profile), method:"post" do %>
+          <i class="far fa-heart"></i>
+          <% end %>
+        <% end %>
+      </div>
     </div>
 
     <div class="col-md-4">
       <br>
-      <h2><%= @profile.user.first_name.capitalize %></h2>
+      <div class="d-flex justify-content-between">
+        <h2><%= @profile.user.first_name.capitalize %></h2>
+        <div class="d-flex justify-content-between">
+          <i class="far fa-heart"></i>
+          <p><%= @profile.favoritors.count %></p>
+        </div>
+      </div>
       <div class="rating-location">
         <div class="d-flex justify-content-start">
           <i class="fas fa-star"></i>
@@ -58,36 +70,36 @@
         </div>
       </div>
     </div>
-</div>
-
-<div class="container">
-  <div class="d-flex justify-content-start my-3">
-    <i class="fas fa-star"></i>
-    <%= @profile.freelancer_reviews.count %><%= " reviews" %>
   </div>
-  <% @profile.freelancer_reviews.each do |review| %>
-    <div class="d-flex justify-content-start my-2">
-      <p> <%= review.booking.user.first_name %> says: </p>
-      <p><%= " " %> "<%= review.content %>"</p>
+
+  <div class="container">
+    <div class="d-flex justify-content-start my-3">
+      <i class="fas fa-star"></i>
+      <%= @profile.freelancer_reviews.count %><%= " reviews" %>
     </div>
-    <p class="card-date"><%= review.created_at.strftime("%B %Y") %></p>
-  <% end %>
-</div>
-<br>
-<br>
-<div class="container my-5">
-  <div  id="profile-edit-btn" class="d-flex flex--column justify-content-around">
-    <% if @profile.user == current_user %>
-      <%= link_to "Edit profile", edit_profile_path(@profile), class:"d-block my-2 btn btn-outline-secondary" %>
-      <%= link_to "Update rates", edit_rates_profile_path, class:"d-block my-2 btn btn-outline-secondary" %>
-      <%= link_to "Back to list", profiles_path, class:"d-block my-2 btn  btn-outline-secondary" %>
-      <br>
-      <br>
-      <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item d-md-none text-center" %>
-    <% else %>
-      <%= link_to "Back to list", profiles_path, class:"btn btn-outline-secondary" %>
+    <% @profile.freelancer_reviews.each do |review| %>
+      <div class="d-flex justify-content-start my-2">
+        <p> <%= review.booking.user.first_name %> says: </p>
+        <p><%= " " %> "<%= review.content %>"</p>
+      </div>
+      <p class="card-date"><%= review.created_at.strftime("%B %Y") %></p>
     <% end %>
   </div>
-</div>
+  <br>
+  <br>
+  <div class="container my-5">
+    <div  id="profile-edit-btn" class="d-flex flex--column justify-content-around">
+      <% if @profile.user == current_user %>
+        <%= link_to "Edit profile", edit_profile_path(@profile), class:"d-block my-2 btn btn-outline-secondary" %>
+        <%= link_to "Update rates", edit_rates_profile_path, class:"d-block my-2 btn btn-outline-secondary" %>
+        <%= link_to "Back to list", profiles_path, class:"d-block my-2 btn  btn-outline-secondary" %>
+        <br>
+        <br>
+        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item d-md-none text-center" %>
+      <% else %>
+        <%= link_to "Back to list", profiles_path, class:"btn btn-outline-secondary" %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
