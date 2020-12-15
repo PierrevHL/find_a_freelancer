@@ -2,6 +2,7 @@ class UserReviewsController < ApplicationController
   def new
     @user_review = UserReview.new
     @booking = Booking.find(params[:booking_id])
+    redirect_to dashboard_path if @booking.user_review
   end
 
   def create
