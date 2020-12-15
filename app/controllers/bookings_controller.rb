@@ -6,8 +6,9 @@ class BookingsController < ApplicationController
     @profile_skill = ProfileSkill.find(params[:booking][:profile_skill])
     @booking.profile_skill = @profile_skill
     if @booking.save
+      attach_session_id
       flash[:notice] = "Your booking request has been sent"
-      redirect_to profile_path(@profile_skill.profile)
+      redirect_to new_booking_payment_path(@booking)
     else
       @profile = @profile_skill.profile
       render "profiles/show"
@@ -16,7 +17,7 @@ class BookingsController < ApplicationController
 
   def update
     @booking = Booking.find(params[:id])
-    
+
     if @booking.update(update_booking_params)
       flash[:notice] = "Booking has been #{@booking.status}"
       redirect_to dashboard_path
@@ -33,5 +34,23 @@ private
   def booking_params
     params.require(:booking).permit(:start_date, :end_date)
   end
+
+  def attach_session_id
+    session = Stripe::Checkout::Session.create(
+      payment_method_types: ['card'],
+      line_items: [{
+        name: @booking.profile_skill.skill.name,
+        images: [@booking.profile.image],
+        amount: @booking.amount_cents,
+        currency: 'eur',
+        quantity: 1
+      }],
+      success_url: dashboard_url,
+      cancel_url: dashboard_url
+    )
+
+    @booking.update(checkout_session_id: session.id)
+  end
+
 end
 

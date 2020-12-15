@@ -12,21 +12,21 @@
     <div class="container">
       <% @bookings.each do |booking| %>
         <div class="list_card mb-4">
-        <%= link_to profile_path(booking.profile_skill.profile), class: "profile-link" do %>
-          <% if booking.profile.image.attached? %>
-            <div class="h-100 list_card-bg" style="background-image: url('<%= booking.profile.image.key %>'); ">
-              <% if booking.status == "completed" && !booking.freelancer_review %>
-                <button class="btn btn-primary review-link" data-url="<%= new_booking_freelancer_review_path(booking) %>">Add a review</button>
-              <% end %>
-            </div>
-          <% else %>
-            <div class="h-100 list_card-bg" style="background-image: url('https://source.unsplash.com/800x600');">
-              <% if booking.status == "completed" && !booking.freelancer_review %>
-                <button class="btn btn-primary review-link" data-url="<%= new_booking_freelancer_review_path(booking) %>">Add a review</button>
-              <% end %>
-            </div>
+          <%= link_to profile_path(booking.profile_skill.profile), class: "profile-link" do %>
+            <% if booking.profile.image.attached? %>
+              <div class="h-100 list_card-bg" style="background-image: url('<%= booking.profile.image.key %>'); ">
+                <% if booking.status == "completed" && !booking.freelancer_review %>
+                  <button class="btn btn-primary review-link" data-url="<%= new_booking_freelancer_review_path(booking) %>">Add a review</button>
+                <% end %>
+              </div>
+            <% else %>
+              <div class="h-100 list_card-bg" style="background-image: url('https://source.unsplash.com/800x600');">
+                <% if booking.status == "completed" && !booking.freelancer_review %>
+                  <button class="btn btn-primary review-link" data-url="<%= new_booking_freelancer_review_path(booking) %>">Add a review</button>
+                <% end %>
+              </div>
+            <% end %>
           <% end %>
-        <% end %>
           <div class="list_card-info w-100">
             <div class="d-flex justify-content-between">
               <div>

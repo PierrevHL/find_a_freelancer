@@ -6,6 +6,9 @@ class Booking < ApplicationRecord
   has_one :user_review
   validates :start_date, :end_date, presence: true #:start_time, :end_time,
   validate :check_booking_dates, on: :create
+  monetize :amount_cents
+
+  before_create :set_amount
 
   validate :end_date_after_start_date
 
@@ -20,6 +23,10 @@ class Booking < ApplicationRecord
 
   def profile
     profile_skill.profile
+  end
+
+  def set_amount
+    self.amount = self.total_price
   end
 
   private
