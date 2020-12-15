@@ -26,5 +26,11 @@ Rails.application.routes.draw do
 
   get "/dashboard", to: "pages#dashboard"
   get "/saved", to: "pages#saved"
+
+
+  devise_scope :user do
+    post "/login" => "devise/sessions#new"
+  end
+
 end
 
