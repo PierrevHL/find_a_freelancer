@@ -4,6 +4,6 @@ module BookingHelper
   end
 
   def freelancer_message(booking)
-    "Hey #{booking.profile.user.first_name}! Here is #{booking.user.first_name} and I need your help as #{booking.profile_skill.skill.name} please :)"
+    "Hey #{booking.profile.user.first_name}! Here is #{booking.user.first_name}. I need your help as #{booking.profile_skill.skill.name} please :)"
   end
 end
