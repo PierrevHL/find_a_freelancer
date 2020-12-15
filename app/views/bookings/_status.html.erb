@@ -20,7 +20,7 @@
         <% if booking.status == "pending" %>
         <br>
           <% if booking.status == "pending" && current_user == booking.profile_skill.profile.user %>
-            <p>Hey <%= booking.profile.user.first_name %>! <%= booking.user.first_name %> needs your help as <%= booking.profile_skill.skill.name %> from <%= booking.start_date.strftime("%A, %b %d") %> - <%= booking.end_date.strftime("%A, %b %d") %>! </p>
+            <p>Hey <%= booking.profile.user.first_name %>! Good news!! <%= booking.user.first_name %> needs your help as <%= booking.profile_skill.skill.name %> from <%= booking.start_date.strftime("%A, %b %d") %> - <%= booking.end_date.strftime("%A, %b %d") %>! </p>
             <p>Go ahead and accept <%= booking.user.first_name %>'s request so you can start this amazing experience! :)</p>
             <%= link_to "Confirm", booking_path(booking, booking: { status: "confirmed" }), method: :patch %>
             <%= link_to "Reject", booking_path(booking, booking: { status: "rejected" }), method: :patch, data: { confirm: "Are you sure you want to reject the booking? You won't be able to see the booking anymore once rejected!"} %>

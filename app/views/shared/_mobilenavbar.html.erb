@@ -27,7 +27,7 @@
 
     <% if user_signed_in? %>
       <% if current_user.profile %>
-        <%= link_to profile_path(current_user.profile), class:"navbar-link #{'active' if action_name == 'show' && controller_name == "profiles"}" do %>
+        <%= link_to profile_path(current_user.profile, h:true), class:"navbar-link #{'active' if action_name == 'show' && controller_name == "profiles"}" do %>
           <li class="nav-item d-flex flex-column">
             <i class="far fa-user"></i>
             <span>Profile</span>

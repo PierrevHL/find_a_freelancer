@@ -10,6 +10,19 @@
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
     <div class="container">
+
+    <p>
+      <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        <i class="fas fa-sliders-h"></i>
+      </a>
+    </p>
+    <div class="collapse" id="collapseExample">
+      <p><%= link_to 'All bookings', dashboard_path, class:"btn btn-primary" %></p>
+      <p><%= link_to 'Pending requests', dashboard_path(type: "user", status: "pending"), class:"btn btn-primary" %></p>
+      <p><%= link_to 'Upcoming bookings', dashboard_path(type: "user", status: "confirmed"), class:"btn btn-primary" %></p>
+      <p><%= link_to 'Completed bookings', dashboard_path(type: "user", status: "completed"), class:"btn btn-primary" %></p>
+    </div>
+
       <% @bookings.each do |booking| %>
         <div class="list_card mb-4">
           <%= link_to profile_path(booking.profile_skill.profile), class: "profile-link" do %>
@@ -49,6 +62,19 @@
   </div>
   <div class="tab-pane fade" id="nav-freelancer" role="tabpanel" aria-labelledby="nav-freelancer-tab">
     <div class="container">
+
+    <p>
+      <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        <i class="fas fa-sliders-h"></i>
+      </a>
+    </p>
+    <div class="collapse" id="collapseExample">
+      <p><%= link_to 'All bookings', dashboard_path, class:"btn btn-primary" %></p>
+      <p><%= link_to 'Pending requests', dashboard_path(type: "freelancer", status: "pending"), class:"btn btn-primary" %></p>
+      <p><%= link_to 'Upcoming bookings', dashboard_path(type: "freelancer", status: "confirmed"), class:"btn btn-primary" %></p>
+      <p><%= link_to 'Completed bookings', dashboard_path(type: "freelancer", status: "completed"), class:"btn btn-primary" %></p>
+    </div>
+
       <% @freelancer_bookings.each do |booking| %>
         <div class="list_card mb-4">
         <%= link_to (booking.user.profile ? profile_path(booking.user.profile) : user_path(booking.user)), class: "profile-link" do %>
