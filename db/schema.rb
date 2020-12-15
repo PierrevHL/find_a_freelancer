@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_14_071735) do
+ActiveRecord::Schema.define(version: 2020_12_15_030501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2020_12_14_071735) do
     t.datetime "updated_at", precision: 6, null: false
     t.time "start_time"
     t.time "end_time"
-    t.string "status", default: "confirmed"
+    t.string "status", default: "pending"
     t.bigint "profile_skill_id", null: false
     t.index ["profile_skill_id"], name: "index_bookings_on_profile_skill_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
@@ -172,6 +172,7 @@ ActiveRecord::Schema.define(version: 2020_12_14_071735) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "phone_number"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -23,7 +23,7 @@
   <br>
   <div class = "row d-md-flex justify-content-center align-items-center">
     <% @profiles.each do |profile| %>
-    <div class="col-lg-4" style="width: 23rem;">
+    <div class="col-lg-4" style="width: 100%;">
       <div class="freelancer-card">
         <div class="profile-img" data-profile-url="<%= profile_path(profile) %>" style="background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2)), url('<%= profile.image.attached? ? cl_image_path(profile.image.key, height: 275, width: 400, crop: :fill)  : 'https://source.unsplash.com/800x600'%>')">
           <% if !user_signed_in? %>
