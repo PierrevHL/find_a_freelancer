@@ -9,9 +9,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <% if booking.status == "pending" && current_user == booking.profile_skill.profile.user %>
-          <%= link_to "Confirm", booking_path(booking, booking: { status: "confirmed" }), method: :patch %>
-          <%= link_to "Reject", booking_path(booking, booking: { status: "rejected" }), method: :patch, data: { confirm: "Are you sure you want to reject the booking? You won't be able to see the booking anymore once rejected!"} %>
+        <% if booking.status == "pending" %>
+          <% if booking.status == "pending" && current_user == booking.profile_skill.profile.user %>
+            <%= link_to "Confirm", booking_path(booking, booking: { status: "confirmed" }), method: :patch %>
+            <%= link_to "Reject", booking_path(booking, booking: { status: "rejected" }), method: :patch, data: { confirm: "Are you sure you want to reject the booking? You won't be able to see the booking anymore once rejected!"} %>
+          <% else %>
+            <p>Hey <%= booking.user.first_name %>! Your booking is still on hold! :)</p>
+          <% end %>
         <% elsif booking.status == "confirmed" %>
         <br>
         <br>
