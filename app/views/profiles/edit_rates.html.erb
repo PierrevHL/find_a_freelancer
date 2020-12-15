@@ -1,5 +1,5 @@
 <div class="container">
-  <% @profile.profile_skills.each do |profile_skill| %>
+  <% @profile.profile_skills.order("created_at DESC").each do |profile_skill| %>
     <%= simple_form_for profile_skill, remote: true do |f| %>
       <div class="row align-items-end">
         <div class="px-1 col-6">

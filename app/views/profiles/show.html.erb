@@ -67,7 +67,9 @@
               <%= f.input :profile_skill, collection: @profile.profile_skills.map {|profile_skill| [profile_skill.skill.name, profile_skill.id] }, input_html: {value: session[:profile_skill]} %>
               <%= f.input :start_date,as: :date, html5: true, input_html: {value: session[:start_date]} %>
               <%= f.input :end_date, html5: true, input_html: {value: session[:end_date]} %>
-              <%= f.submit "Book", class: "btn btn-primary" %>
+              <button class="btn btn-primary" type="submit">
+                <i class='far fa-credit-card'></i> Book
+              </button>
             <% end %>
             <p id="live-price" class="my-4"></p>
           <% end %>

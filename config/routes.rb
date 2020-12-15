@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :bookings, only: [:create, :update] do
     resources :user_reviews, only: [:index, :new, :create]
     resources :freelancer_reviews, only: [:index, :new, :create]
+    resources :payments, only: :new
   end
 
   resources :conversations, only: [:index, :show, :create] do
