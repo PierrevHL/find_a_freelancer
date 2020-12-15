@@ -27,9 +27,10 @@
     </div>
     <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
     <div>
+    <br>
       <%= f.submit "Add Reply", class:"btn btn-primary" %>
     </div>
   <% end %>
 </div>
-
+<br>
 <%= link_to 'Back to messages', conversations_path %>

@@ -27,4 +27,14 @@
 
 a.navbar-link {
   color: $dark-green;
+  text-decoration: none;
+
+  &:active {
+    background-color: rgb(194, 187, 187);
+    border-radius: 17px;
+  }
+
+  &.active {
+    color: black;
+  }
 }

@@ -3,35 +3,70 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
+      <% if booking.status == "pending" %>
         <h5 class="modal-title" id="status-modal-<%= booking.id %>Label">Booking request</h5>
+      <% elsif booking.status == "confirmed" %>
+        <h5 class="modal-title" id="status-modal-<%= booking.id %>Label">Booking confirmed</h5>
+      <% elsif booking.status == "completed" %>
+        <h5 class="modal-title" id="status-modal-<%= booking.id %>Label">Booking completed</h5>
+      <% elsif booking.status == "rejected" %>
+        <h5 class="modal-title" id="status-modal-<%= booking.id %>Label">Booking rejected</h5>
+      <% end %>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <% if booking.status == "pending" && current_user == booking.profile_skill.profile.user %>
-          <%= link_to "Confirm", booking_path(booking, booking: { status: "confirmed" }), method: :patch %>
-          <%= link_to "Reject", booking_path(booking, booking: { status: "rejected" }), method: :patch, data: { confirm: "Are you sure you want to reject the booking? You won't be able to see the booking anymore once rejected!"} %>
-        <% elsif booking.status == "confirmed" %>
+        <% if booking.status == "pending" %>
         <br>
+          <% if booking.status == "pending" && current_user == booking.profile_skill.profile.user %>
+            <p>Hey <%= booking.profile.user.first_name %>! <%= booking.user.first_name %> needs your help as <%= booking.profile_skill.skill.name %> from <%= booking.start_date.strftime("%A, %b %d") %> - <%= booking.end_date.strftime("%A, %b %d") %>! </p>
+            <p>Go ahead and accept <%= booking.user.first_name %>'s request so you can start this amazing experience! :)</p>
+            <%= link_to "Confirm", booking_path(booking, booking: { status: "confirmed" }), method: :patch %>
+            <%= link_to "Reject", booking_path(booking, booking: { status: "rejected" }), method: :patch, data: { confirm: "Are you sure you want to reject the booking? You won't be able to see the booking anymore once rejected!"} %>
+          <% else %>
+            <p>Hey <%= booking.user.first_name %>! Your booking is still on hold! :)</p>
+          <% end %>
+        <% elsif booking.status == "confirmed" %>
         <br>
           <% if booking.status == "confirmed" && current_user == booking.profile_skill.profile.user %>
             <p><strong>Congrats!</strong> <%= booking.user.first_name %> is expecting you from <%= booking.start_date.strftime("%A, %b %d") %> - <%= booking.end_date.strftime("%A, %b %d") %>! :)</p>
-            <p>Go ahead and get in touch with <%= booking.user.first_name %> via mail or just send him a message here directly!</p>
+            <p>Go ahead and get in touch with <%= booking.user.first_name %> via mail or WhatsApp or just send him a message here directly!</p>
             <p><%= booking.user.email %></p>
-          <% else%>
+            <%= link_to "https://wa.me/#{booking.user.phone_number}?text=#{client_message(booking)}", class: "text-decoration-none" do %>
+              <i class="fab fa-whatsapp"></i>  WhatsApp
+            <% end %>
+          <% else %>
             <p><strong>Congrats!</strong> <%= booking.profile.user.first_name %> will be there for you from <%= booking.start_date.strftime("%A, %b %d") %> - <%= booking.end_date.strftime("%A, %b %d") %>! :)</p>
-            <p>Go ahead and get in touch with <%= booking.profile.user.first_name %> via mail or just send him a message here directly!</p>
+            <p>Go ahead and get in touch with <%= booking.profile.user.first_name %> via mail or WhatsApp or just send him a message here directly!</p>
             <p><%= booking.user.email %></p>
+            <%= link_to "https://wa.me/#{booking.profile_skill.profile.user.phone_number}?text=#{freelancer_message(booking)}", class: "text-decoration-none" do %>
+              <i class="fab fa-whatsapp"></i>  WhatsApp
+            <% end %>
+          <% end %>
+        <% elsif booking.status == "completed" %>
+        <br>
+          <% if booking.status == "confirmed" && current_user == booking.profile_skill.profile.user %>
+            <p><strong>Congrats!</strong> This booking is already completed! :)</p>
+            <p>We hope you had a great experience with <%= booking.user.first_name %> and FaF! If you haven't done so already, please leave a review for <%= booking.user.first_name %> and let others know about your experience! Have a great day!! :)</p>
+          <% else %>
+            <p><strong>Congrats!</strong> This booking is already completed! :)</p>
+            <p>We hope you had a great experience with <%= booking.profile.user.first_name %> and FaF! If you haven't done so already, please leave a review for <%= booking.profile.user.first_name %> and let others know about your experience! Have a great day!! :)</p>
+          <% end %>
+        <% elsif booking.status == "rejected" %>
+          <% if booking.status == "confirmed" && current_user == booking.profile_skill.profile.user %>
+
+          <% else %>
+            <p>Hey <%= booking.user.first_name %>! Unfortunately <%= booking.profile.user.first_name %> can't help you at the moment. Please go ahead and find someone else! :)</p>
           <% end %>
         <% end %>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <% if booking.status == "pending" && current_user == booking.profile_skill.profile.user %>
-          <button type="button" class="btn btn-primary">Save changes</button>
         <% elsif booking.status == "confirmed" %>
           <p><%= link_to 'Send a message', conversations_path(sender_id: current_user.id, receiver_id: booking.user.id), method: 'post', class:"btn btn-primary" %></p>
+        <% elsif booking.status == "rejected" %>
+          <p><%= link_to 'Explore', root_path, class:"btn btn-primary" %></p>
         <% end %>
       </div>
     </div>
