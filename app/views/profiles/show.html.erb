@@ -80,7 +80,9 @@
   </div>
 
   <div id="ig-pictures" data-username="<%= @profile.user.username %>" class="instafeed">
-    <h4>My latest work:</h4>
+    <% if @profile.user.username %>
+      <h4>My latest work:</h4>
+    <% end %>
     <div class="row justify-content-around">
       <%# @pictures.each do  |img_url| %>
         <div class="col-sm-4 justify-content-around">
@@ -96,9 +98,9 @@
       <%= @profile.freelancer_reviews.count %><%= " reviews" %>
     </div>
     <% @profile.freelancer_reviews.each do |review| %>
-      <div class="d-flex justify-content-start my-2">
-        <p> <%= review.booking.user.first_name %> says: </p>
-        <p><%= " " %> "<%= review.content %>"</p>
+      <div class="d-flex flex-column my-1">
+        <p class="review-text"><%= review.booking.user.first_name %> says: </p>
+        <p class="review-text"><%= " " %> "<%= review.content %>"</p>
       </div>
       <p class="card-date"><%= review.created_at.strftime("%B %Y") %></p>
     <% end %>
