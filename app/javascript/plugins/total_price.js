@@ -38,9 +38,9 @@ const iniTotalPrice = () => {
     skillElement.addEventListener("change", (event) => {
       startDateInput.value = ""
       endDateInput.value = ""
-      priceNode.innerText = "Total price: 0$"
+      priceNode.innerText = "Total price: 0€"
     })
-  
+
   }
 
 }
