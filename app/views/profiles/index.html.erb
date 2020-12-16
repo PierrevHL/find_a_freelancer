@@ -1,19 +1,19 @@
 <h3 class="text-center pt-4">Freelancers</h3>
 <div class="container">
 <p>
-  <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+  <a class="btn btn-primary btn-shadow" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
     <i class="fas fa-sliders-h"></i>
   </a>
 </p>
 <div class="collapse" id="collapseExample">
   <%= simple_form_for :search, url: profiles_path, method: :get, html: { class: "search-form d-flex justify-content-center" } do |f| %>
     <div class="search-form-control d-md-flex justify-content-center align-items-center">
-      <input class="form-control string required w-md-50" type="text" placeholder="Skill"  name="skill" value="<%= params[:skill] %>" />
-      <input class="form-control string required w-md-50" type="text" placeholder="Location/ Name / etc." name="query" value="<%= params[:query] %>" />
-      <%= f.input :starts_at, as: :string, required: false, input_html: {class: "datepicker", id: "search_starts_at", placeholder: "From", value: params[:search] && params[:search][:starts_at]}, wrapper_html: { class: "mb-0 w-md-25"}, label: false %>
-      <%= f.input :ends_at, as: :string, required: false, input_html: {class: "datepicker", id: "search_ends_at", placeholder: "Until", value: params[:search] && params[:search][:ends_at]}, wrapper_html: { class: "mb-0 w-md-25"}, label: false%>
-      <input class="form-control string required w-md-50" type="text" placeholder="$ Min Price/hour"  name="low_rate" value="<%= params[:low_rate] %>" />
-      <input class="form-control string required w-md-50" type="text" placeholder="$ Max Price/hour"  name="high_rate" value="<%= params[:high_rate] %>" />
+      <input class="form-control string required w-md-50 btn-shadow" type="text" placeholder="Skill"  name="skill" value="<%= params[:skill] %>" />
+      <input class="form-control string required w-md-50 btn-shadow" type="text" placeholder="Location/ Name / etc." name="query" value="<%= params[:query] %>" />
+      <%= f.input :starts_at, as: :string, required: false, input_html: {class: "datepicker btn-shadow", id: "search_starts_at", placeholder: "From", value: params[:search] && params[:search][:starts_at]}, wrapper_html: { class: "mb-0 w-md-25"}, label: false %>
+      <%= f.input :ends_at, as: :string, required: false, input_html: {class: "datepicker btn-shadow", id: "search_ends_at", placeholder: "Until", value: params[:search] && params[:search][:ends_at]}, wrapper_html: { class: "mb-0 w-md-25"}, label: false%>
+      <input class="form-control string required w-md-50 btn-shadow" type="text" placeholder="$ Min Price/hour"  name="low_rate" value="<%= params[:low_rate] %>" />
+      <input class="form-control string required w-md-50 btn-shadow" type="text" placeholder="$ Max Price/hour"  name="high_rate" value="<%= params[:high_rate] %>" />
       <button name="button" type="submit" class="btn btn-flat" id="price-search">
         <i class="fas fa-search"></i> Search
       </button>
@@ -25,7 +25,7 @@
     <% @profiles.each do |profile| %>
     <div class="col-lg-4" style="width: 100%;">
       <div class="freelancer-card">
-        <div class="profile-img" data-profile-url="<%= profile_path(profile) %>" style="background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2)), url('<%= profile.image.attached? ? cl_image_path(profile.image.key, height: 275, width: 400, crop: :fill)  : 'https://source.unsplash.com/800x600'%>')">
+        <div class="profile-img btn-shadow" data-profile-url="<%= profile_path(profile) %>" style="background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2)), url('<%= profile.image.attached? ? cl_image_path(profile.image.key, height: 275, width: 400, crop: :fill)  : 'https://source.unsplash.com/800x600'%>')">
           <% if !user_signed_in? %>
             <%= link_to login_path, method: :post do  %>
               <i class="far fa-heart"></i>
