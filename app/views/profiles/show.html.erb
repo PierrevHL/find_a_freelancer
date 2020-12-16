@@ -2,6 +2,18 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
+      <div class="d-flex justify-content-between">
+        <div class="d-flex align-items-start flex-column">
+          <h2><%= @profile.user.first_name.capitalize %></h2>
+          <p><%= @profile.location %></p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <i class="fas fa-heart"></i>
+          <p><%= @profile.favoritors.count %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
       <div class="profile-img" style="background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2)), url('<%= @profile.image.attached? ? cl_image_path(@profile.image.key, height: 275, width: 400, crop: :fill)  : 'https://source.unsplash.com/800x600'%>')">
         <% if !user_signed_in? %>
           <%= link_to login_path, method: :post do  %>
@@ -20,35 +32,23 @@
     </div>
 
     <div class="col-md-4">
-      <br>
-      <div class="d-flex justify-content-between">
-        <h2><%= @profile.user.first_name.capitalize %></h2>
-        <div class="d-flex justify-content-between">
-          <i class="fas fa-heart"></i>
-          <p><%= @profile.favoritors.count %></p>
-        </div>
-      </div>
       <div class="rating-location">
         <div class="d-flex justify-content-start">
           <i class="fas fa-star"></i>
           <p class="rating"><%= @profile.rating %></p>
           <p><%= "(" %><%= @profile.freelancer_reviews.count %><%= ")" %></p>
         </div>
-        <p><%= @profile.location %></p>
       </div>
       <br>
-      <h3><%= @profile.description %></h3>
-      <br>
-      <% @profile.profile_skills.each do |profile_skill| %>
-        <div class="d-flex justify-content-between">
-          <p><%= profile_skill.skill.name %></p>
-          <p data-profile-skill="ps-<%= profile_skill.id %>" data-rate="<%= profile_skill.rate %>"><%= profile_skill.rate || 0 %><%= " €/hour" %></p>
-        </div>
-      <% end %>
-
-      <br>
-
-      <br>
+      <h4><%= @profile.description %></h4>
+      <div class="skills-card">
+        <% @profile.profile_skills.each do |profile_skill| %>
+          <div class="d-flex justify-content-between">
+            <p><%= profile_skill.skill.name %></p>
+            <p data-profile-skill="ps-<%= profile_skill.id %>" data-rate="<%= profile_skill.rate %>"><%= profile_skill.rate || 0 %><%= " €/hour" %></p>
+          </div>
+        <% end %>
+      </div>
     </div>
 
     <div class="col-md-4">
@@ -64,7 +64,8 @@
             <% end %>
             </div>
             <%= simple_form_for [@booking] do |f| %>
-              <%= f.input :profile_skill, label: "Book #{current_user.first_name} as:" collection: @profile.profile_skills.map {|profile_skill| [profile_skill.skill.name, profile_skill.id] }, input_html: {value: session[:profile_skill]} %>
+              <%= f.hidden_field :profile_id, value: @profile.id %>
+              <%= f.input :profile_skill, label: "Book #{@profile.user.first_name} as:", collection: @profile.profile_skills.map {|profile_skill| [profile_skill.skill.name, profile_skill.id] }, input_html: {value: session[:profile_skill]}, required: true %>
               <%= f.input :start_date,as: :date, html5: true, input_html: {value: session[:start_date]} %>
               <%= f.input :end_date, html5: true, input_html: {value: session[:end_date]} %>
               <button class="btn btn-primary" type="submit">
@@ -78,7 +79,8 @@
     </div>
   </div>
 
-  <div id="ig-pictures" data-username="<%= @profile.user.username %>" class="container">
+  <div id="ig-pictures" data-username="<%= @profile.user.username %>" class="instafeed">
+    <h4>My latest work:</h4>
     <div class="row justify-content-around">
       <%# @pictures.each do  |img_url| %>
         <div class="col-sm-4 justify-content-around">
