@@ -10,7 +10,7 @@
           <div class="d-flex <%= 'flex-row-reverse' if message.user == current_user %>">
             <% if message.user.image.attached? %>
               <%= cl_image_tag message.user.image.key, class: "avatar avatar-msg #{message.user == current_user ? 'ml-2' : 'mr-2'}" %>
-            <% elsif message.user.profile.image.attached? %>
+            <% elsif message.user.profile && message.user.profile.image.attached? %>
               <%= cl_image_tag message.user.profile.image.key, class: "avatar avatar-msg #{message.user == current_user ? 'ml-2' : 'mr-2'}" %>
             <% else %>
               <img class="avatar avatar-msg <%= message.user == current_user ? 'ml-2' : 'mr-2' %>" src="https://source.unsplash.com/800x600/?worker" alt="">

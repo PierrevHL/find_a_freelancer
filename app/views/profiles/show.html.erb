@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="col-md-4">
-      <div class="profile-img" style="background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2)), url('<%= @profile.image.attached? ? cl_image_path(@profile.image.key, height: 275, width: 400, crop: :fill)  : 'https://source.unsplash.com/800x600'%>')">
+      <div class="profile-img btn-shadow" style="background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2)), url('<%= @profile.image.attached? ? cl_image_path(@profile.image.key, height: 275, width: 400, crop: :fill)  : 'https://source.unsplash.com/800x600'%>')">
         <% if !user_signed_in? %>
           <%= link_to login_path, method: :post do  %>
             <i class="far fa-heart"></i>
