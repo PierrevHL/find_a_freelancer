@@ -4,15 +4,21 @@
     <div class="item">
       <% @conversations.each do |conversation| %>
         <% if conversation.messages.any?%>
-          <a href= "<%= conversation_messages_path(conversation) %>" class="custom-card">
+          <a href= "<%= conversation_messages_path(conversation) %>" class="custom-card d-block mx-3">
             <div class="conv-card">
-              <div class="img">
-                <img class="avatar" src="https://source.unsplash.com/800x600/?worker" alt="">
+              <div>
+                <% if conversation.messages.last.user.image.attached? %>
+                  <%= cl_image_tag conversation.messages.last.user.image.key, class: "avatar avatar-msg" %>
+                <% elsif conversation.messages.last.user.profile.image.attached? %>
+                  <%= cl_image_tag conversation.messages.last.user.profile.image.key, class: "avatar avatar-msg" %>
+                <% else %>
+                  <img class="avatar avatar-msg" src="https://source.unsplash.com/800x600/?worker" alt="">
+                <% end %>
               </div>
-              <div class="content">
-                <h5 class="card-title"><%= conversation.contact.first_name %></h5>
-                <p><%= conversation.messages.last.content.truncate(35) %></p>
-                <p class="card-date"><%= conversation.messages.last.created_at.strftime("%A, %b %d") %></p>
+              <div class="d-flex flex-column w-100 ml-2">
+                <span><strong><%= conversation.messages.last.user.first_name %><%= " " %></strong></span>
+                <span> <%= conversation.messages.last.content.truncate(35) %></span>
+                <span class="card-date text-right"><%= conversation.messages.last.created_at.strftime("%A, %b %d") %></span>
               </div>
             </div>
           </a>

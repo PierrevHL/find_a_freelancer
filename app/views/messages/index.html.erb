@@ -1,19 +1,28 @@
 <% if @over_ten %>
-  <%= link_to 'Show Previous', conversation_messages_path(m: 9)%>
+  <%= link_to 'Show Previous', conversation_messages_path(m: 9), class: "d-block mt-4 ml-3" %>
 <% end %>
 <div class="container">
-  <div class="ui segment">
+  <div class="ui segment px-2">
     <% @messages.each do |message| %>
       <% if message.content %>
         <% user = User.find(message.user_id) %>
-        <div class="item">
-          <div class="content">
-            <div class="header"><strong><%= user.first_name %><%= " " %></strong><%= message.created_at %></div>
-            <div class="list">
-              <div class="item">
-                <i class="right triangle icon"></i>
-                <%= message.content %>
-              </div>
+        <div class="item mb-3">
+          <div class="d-flex <%= 'flex-row-reverse' if message.user == current_user %>">
+            <% if message.user.image.attached? %>
+              <%= cl_image_tag message.user.image.key, class: "avatar avatar-msg #{message.user == current_user ? 'ml-2' : 'mr-2'}" %>
+            <% elsif message.user.profile.image.attached? %>
+              <%= cl_image_tag message.user.profile.image.key, class: "avatar avatar-msg #{message.user == current_user ? 'ml-2' : 'mr-2'}" %>
+            <% else %>
+              <img class="avatar avatar-msg <%= message.user == current_user ? 'ml-2' : 'mr-2' %>" src="https://source.unsplash.com/800x600/?worker" alt="">
+            <% end %>
+            <div class="d-flex flex-column">
+              <span class="<%= message.user == current_user ? 'text-right' : '' %>"><strong><%= user.first_name %><%= " " %></strong></span>
+              <span class="text-muted text-sm"><%= time_ago_in_words message.created_at %> ago</span>
+            </div>
+          </div>
+          <div class="list">
+            <div class="item text-break <%= message.user == current_user ? 'd-flex justify-content-end mr-6' : 'ml-6' %>">
+              <%= message.content %>
             </div>
           </div>
         </div>
@@ -21,16 +30,20 @@
     <% end %>
   </div>
 
-  <%= form_for [@conversation, @message], html: {class: "ui reply form"} do |f| %>
+  <%= form_for [@conversation, @message], html: {class: "ui reply form px-3"} do |f| %>
     <div class="field">
       <%= f.text_area :content, class: "form-control" %>
     </div>
     <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
-    <div>
-    <br>
-      <%= f.submit "Send", class:"btn btn-primary" %>
+    <div class='d-flex justify-content-between mt-3'>
+    <%= link_to conversation_messages_path(@conversation), class: "text-decoration-none" do %>
+      <i class="fas fa-sync-alt"></i>  Refresh
+    <% end %>      
+    <%= f.submit "Send", class:"btn btn-primary" %>
     </div>
   <% end %>
 </div>
 <br>
-<%= link_to 'Back to messages', conversations_path %>
+<br>
+
+<%= link_to 'Back to messages', conversations_path, class: "d-block mb-3 text-center" %>

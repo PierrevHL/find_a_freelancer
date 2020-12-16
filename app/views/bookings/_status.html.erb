@@ -64,7 +64,11 @@
       <div class="modal-footer">
         <% if booking.status == "pending" && current_user == booking.profile_skill.profile.user %>
         <% elsif booking.status == "confirmed" %>
-          <p><%= link_to 'Send a message', conversations_path(sender_id: current_user.id, receiver_id: booking.user.id), method: 'post', class:"btn btn-primary" %></p>
+          <% if booking.status == "confirmed" && current_user == booking.profile_skill.profile.user %>
+            <p><%= link_to 'Send a message', conversations_path(sender_id: current_user.id, receiver_id: booking.user.id), method: 'post', class:"btn btn-primary" %></p>
+          <% else %>
+            <p><%= link_to 'Send a message', conversations_path(sender_id: booking.profile_skill.profile.user.id, receiver_id: current_user.id), method: 'post', class:"btn btn-primary" %></p>
+          <% end %>
         <% elsif booking.status == "rejected" %>
           <p><%= link_to 'Explore', root_path, class:"btn btn-primary" %></p>
         <% end %>

@@ -1,6 +1,10 @@
 .avatar {
   width: 50px;
   border-radius: 50%;
+
+  &.avatar-msg {
+    height: 50px;
+  }
 }
 .avatar-large {
   width: 56px;
