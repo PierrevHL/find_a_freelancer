@@ -3,6 +3,18 @@
   border-color: $dark-green;
 }
 
+.filter-btn {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 17px;
+
+  &:last-of-type {
+    margin-bottom: 35px;
+    padding: 10px;
+    border-radius: 17px;
+  }
+}
+
 .btn-primary:hover {
   background-color: white;
   border-color: $dark-green;
