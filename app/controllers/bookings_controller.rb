@@ -3,14 +3,14 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @user = current_user
     @booking.user = @user
-    @profile_skill = ProfileSkill.find(params[:booking][:profile_skill])
+    @profile_skill = params[:booking][:profile_skill].present? ? ProfileSkill.find(params[:booking][:profile_skill]) : nil
     @booking.profile_skill = @profile_skill
     if @booking.save
       attach_session_id
       flash[:notice] = "Your booking request has been sent"
       redirect_to new_booking_payment_path(@booking)
     else
-      @profile = @profile_skill.profile
+      @profile = Profile.find(params[:booking][:profile_id])
       render "profiles/show"
     end
   end
