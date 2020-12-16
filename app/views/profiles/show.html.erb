@@ -79,6 +79,14 @@
   </div>
 
   <div class="container">
+    <div id = "insta-feed">
+      <% @pictures.each do  |img_url| %>
+        <%= image_tag img_url %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="container">
     <div class="d-flex justify-content-start my-3">
       <i class="fas fa-star"></i>
       <%= @profile.freelancer_reviews.count %><%= " reviews" %>
@@ -110,4 +118,19 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
