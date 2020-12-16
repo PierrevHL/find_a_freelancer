@@ -40,6 +40,19 @@ class ProfilesController < ApplicationController
         infoWindow: render_to_string(partial: "info_window", locals: { profile: profile })
       }
     end
+
+    @profiles.each do |profile|
+      @range = []
+      rates = []
+      profile.profile_skills.each do |skill|
+        rates << skill.rate_cents
+      end
+      max_price = rates.max { |a, b| a <=> b }
+      min_price = rates.min { |a, b| a <=> b }
+      @range << (max_price / 100)
+      @range << (min_price / 100)
+    end
+
   end
 
   def show
