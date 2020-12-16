@@ -2,25 +2,25 @@
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <% if (user_signed_in? && current_user.profile) || !user_signed_in? %>
-      <a class="nav-item nav-link active" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="true">User bookings</a>
-      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-freelancer" role="tab" aria-controls="nav-freelancer" aria-selected="false">Freelancer bookings</a>
+      <a class="nav-item nav-link <%= "active" if params[:type] == "user" || !params[:type] %>" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="true">User bookings</a>
+      <a class="nav-item nav-link <%= "active" if params[:type] == "freelancer" %>" id="nav-profile-tab" data-toggle="tab" href="#nav-freelancer" role="tab" aria-controls="nav-freelancer" aria-selected="false">Freelancer bookings</a>
     <% end %>
   </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
+  <div class="tab-pane fade <%= "show active" if params[:type] == "user" || !params[:type] %>" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
     <div class="container">
 
     <p>
-      <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+      <a class="btn btn-primary" data-toggle="collapse" href="#userBookings" role="button" aria-expanded="false" aria-controls="userBookings">
         <i class="fas fa-sliders-h"></i>
       </a>
     </p>
-    <div class="collapse" id="collapseExample">
-      <p><%= link_to 'All bookings', dashboard_path, class:"btn btn-primary" %></p>
-      <p><%= link_to 'Pending requests', dashboard_path(type: "user", status: "pending"), class:"btn btn-primary" %></p>
-      <p><%= link_to 'Upcoming bookings', dashboard_path(type: "user", status: "confirmed"), class:"btn btn-primary" %></p>
-      <p><%= link_to 'Completed bookings', dashboard_path(type: "user", status: "completed"), class:"btn btn-primary" %></p>
+    <div class="collapse" id="userBookings">
+      <%= link_to 'All', dashboard_path, class:"btn btn-primary d-block w-100 filter-btn" %>
+      <%= link_to 'Pending', dashboard_path(type: "user", status: "pending"), class:"btn btn-primary d-block w-100 filter-btn" %>
+      <%= link_to 'Upcoming', dashboard_path(type: "user", status: "confirmed"), class:"btn btn-primary d-block w-100 filter-btn" %>
+      <%= link_to 'Completed', dashboard_path(type: "user", status: "completed"), class:"btn btn-primary d-block w-100 filter-btn" %>
     </div>
 
       <% @bookings.each do |booking| %>
@@ -60,19 +60,19 @@
       <% end %>
     </div>
   </div>
-  <div class="tab-pane fade" id="nav-freelancer" role="tabpanel" aria-labelledby="nav-freelancer-tab">
+  <div class="tab-pane fade <%= "show active" if params[:type] == "freelancer" %>" id="nav-freelancer" role="tabpanel" aria-labelledby="nav-freelancer-tab">
     <div class="container">
 
     <p>
-      <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+      <a class="btn btn-primary" data-toggle="collapse" href="#freelancerBookings" role="button" aria-expanded="false" aria-controls="freelancerBookings">
         <i class="fas fa-sliders-h"></i>
       </a>
     </p>
-    <div class="collapse" id="collapseExample">
-      <p><%= link_to 'All bookings', dashboard_path, class:"btn btn-primary" %></p>
-      <p><%= link_to 'Pending requests', dashboard_path(type: "freelancer", status: "pending"), class:"btn btn-primary" %></p>
-      <p><%= link_to 'Upcoming bookings', dashboard_path(type: "freelancer", status: "confirmed"), class:"btn btn-primary" %></p>
-      <p><%= link_to 'Completed bookings', dashboard_path(type: "freelancer", status: "completed"), class:"btn btn-primary" %></p>
+    <div class="collapse" id="freelancerBookings">
+      <%= link_to 'All', dashboard_path, class:"btn btn-primary d-block w-100 filter-btn" %>
+      <%= link_to 'Pending', dashboard_path(type: "freelancer", status: "pending"), class:"btn btn-primary d-block w-100 filter-btn" %>
+      <%= link_to 'Upcoming', dashboard_path(type: "freelancer", status: "confirmed"), class:"btn btn-primary d-block w-100 filter-btn" %>
+      <%= link_to 'Completed', dashboard_path(type: "freelancer", status: "completed"), class:"btn btn-primary d-block w-100 filter-btn" %>
     </div>
 
       <% @freelancer_bookings.each do |booking| %>
