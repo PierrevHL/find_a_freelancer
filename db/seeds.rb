@@ -15,8 +15,8 @@ Booking.destroy_all
 Profile.destroy_all
 User.destroy_all
 
-puts "Database claned"
-skill = ["Photographer", "Programmer", "UX designer", "Cleaner", "Plumber", "Electrical technician", "Tutor", "Translator", "Driver", "Gardener", "Model", "Writer", "Editor", "Bookkeeper", "Coach", "Cook", "Graphic designer", "Personal trainer"]
+puts "Database cleaned"
+skill = ["Photographer", "Programmer", "UX designer", "Cleaner", "Plumber", "Electrical technician", "Tutor", "Translator", "Driver", "Gardener", "Model", "Writer", "Editor", "Bookkeeper", "Coach", "Cook", "Graphic designer", "Personal trainer", "Virtual assistant", "Courier"]
 
 skill.each {|skill| Skill.create(name: skill)}
 
@@ -27,11 +27,13 @@ skill.each {|skill| Skill.create(name: skill)}
     email: Faker::Internet.email,
     password: "123123",
   )
-
+  begin
   keyword = ["woman", "person", "man"].sample
   file = URI.open("https://source.unsplash.com/800x600/?#{keyword}")
   user.image.attach(io: file, filename: "#{user.first_name}.jpg", content_type: 'image/png')
-
+  rescue
+    user.destroy
+  end
   puts "#{User.count} users created"
 end
 
@@ -59,6 +61,12 @@ Profile.first(10).each do |profile|
   profile.save!
 end
 
+User.first(10).each do |user|
+  Profile.last(10).each do |profile|
+    user.favorite(profile)
+  end
+end
+
 40.times do
   start =  Date.today + rand(30..40)
   booking = Booking.new(
@@ -82,5 +90,6 @@ end
     end
   puts "#{Booking.count} bookings created"
 end
+
 
 puts "Finished seeding"
