@@ -1,3 +1,5 @@
+require 'open-uri'
+require 'json'
 class ProfilesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show, :edit, :update]
   before_action :set_profile, only: [:edit, :update, :show, :edit_rates, :add_favorite, :unfavorite]
@@ -42,6 +44,15 @@ class ProfilesController < ApplicationController
 
   def show
     @booking = Booking.new
+    url = "https://www.instagram.com/#{@profile.user.username}/?__a=1"
+    begin
+      user_serialized = open(url).read
+      data = JSON.parse(user_serialized)
+      result_array = data["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"]
+      @pictures = result_array.first(6).map { |res| res["node"]["display_url"] }
+    rescue
+      @pictures = []
+    end
   end
 
   def new
@@ -52,7 +63,9 @@ class ProfilesController < ApplicationController
     @profile = Profile.new(profile_params)
     @user = current_user
     @profile.user = @user
+    @user.username = params[:profile][:user][:username] if params[:profile][:user][:username].present?
     if @profile.save
+      @user.save
       params[:profile][:skills][1..-1].each do |skill|
         ProfileSkill.create!(profile: @profile, skill_id: skill)
       end

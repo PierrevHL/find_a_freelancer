@@ -1,5 +1,6 @@
 .fas.fa-star {
   padding: 2px;
+  color: $dark-green;
 }
 
 p.rating {
@@ -26,4 +27,13 @@ p.card-date {
 .fa-heart{
   margin-top: 3.5px;
   margin-right: 3.5px;
+  color: $dark-green;
+}
+
+img.instafeed {
+  margin-bottom: 12px !important;
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  display: block;
 }
