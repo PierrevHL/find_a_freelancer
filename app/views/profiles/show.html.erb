@@ -78,13 +78,13 @@
     </div>
   </div>
 
-  <div class="container">
+  <div id="ig-pictures" data-username="<%= @profile.user.username %>" class="container">
     <div class="row justify-content-around">
-      <% @pictures.each do  |img_url| %>
+      <%# @pictures.each do  |img_url| %>
         <div class="col-sm-4 justify-content-around">
-          <%= image_tag img_url, class:"instafeed" %>
+          <%#= image_tag img_url, class:"instafeed" %>
         </div>
-      <% end %>
+      <%# end %>
     </div>
   </div>
 
@@ -120,7 +120,6 @@
     </div>
   </div>
 </div>
-
 
 
 

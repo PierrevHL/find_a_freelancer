@@ -25,7 +25,7 @@ class ProfilesController < ApplicationController
     if low_rate_query.present? || high_rate_query.present?
       low_rate = low_rate_query.present? ? low_rate_query.to_i : 0
       high_rate = high_rate_query.present? ? high_rate_query.to_i : 1000000
-      @profiles = @profiles.joins(:profile_skills).where(profile_skills: {rate: low_rate..high_rate}).distinct
+      @profiles = @profiles.joins(:profile_skills).where(profile_skills: {rate_cents: ((low_rate * 100)..(100 * high_rate))}).distinct
     end
 
     if params[:search].present? && params[:search][:starts_at].present?
@@ -45,14 +45,15 @@ class ProfilesController < ApplicationController
   def show
     @booking = Booking.new
     url = "https://www.instagram.com/#{@profile.user.username}/?__a=1"
-    begin
-      user_serialized = open(url).read
-      data = JSON.parse(user_serialized)
-      result_array = data["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"]
-      @pictures = result_array.first(6).map { |res| res["node"]["display_url"] }
-    rescue
-      @pictures = []
-    end
+    # begin
+    #   user_serialized = open(url).read
+    #   data = JSON.parse(user_serialized)
+    #   result_array = data["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"]
+    #   @pictures = result_array.first(6).map { |res| res["node"]["display_url"] }
+    # rescue => e
+    #   puts e
+    #   @pictures = []
+    # end
   end
 
   def new
