@@ -3,7 +3,7 @@ class ConversationsController < ApplicationController
 
   def index
     @conversations = Conversation.where(sender: current_user).or(Conversation.where(receiver: current_user))
-    @conversations = @conversations.joins(:messages).order("messages.created_at").uniq
+    @conversations = @conversations.joins(:messages).order("messages.created_at DESC").uniq
     @conversations.each { |conv| conv.contact = conv.contact_user(current_user) }
   end
 
