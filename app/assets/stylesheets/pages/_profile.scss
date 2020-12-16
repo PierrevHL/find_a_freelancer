@@ -27,6 +27,10 @@ p.card-date {
   }
 }
 
+.rating-location{
+  margin-top: 12px;
+}
+
 .fa-heart{
   margin-top: 3.5px;
   margin-right: 3.5px;
@@ -39,4 +43,11 @@ img.instafeed {
   height: 200px;
   margin: auto;
   display: block;
+}
+
+.instafeed {
+  h4{
+    text-align: center !important;
+    padding: 6px !important;
+  }
 }
