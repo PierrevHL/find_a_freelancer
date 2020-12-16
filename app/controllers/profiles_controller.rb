@@ -44,7 +44,7 @@ class ProfilesController < ApplicationController
 
   def show
     @booking = Booking.new
-    url = 'https://www.instagram.com/guido___c/?__a=1'
+    url = "https://www.instagram.com/#{@profile.user.username}/?__a=1"
     begin
       user_serialized = open(url).read
       data = JSON.parse(user_serialized)
@@ -63,7 +63,9 @@ class ProfilesController < ApplicationController
     @profile = Profile.new(profile_params)
     @user = current_user
     @profile.user = @user
+    @user.username = params[:profile][:user][:username] if params[:profile][:user][:username].present?
     if @profile.save
+      @user.save
       params[:profile][:skills][1..-1].each do |skill|
         ProfileSkill.create!(profile: @profile, skill_id: skill)
       end

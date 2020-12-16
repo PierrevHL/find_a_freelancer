@@ -6,6 +6,11 @@
               autofocus: true %>
   <%= f.input :location %>
   <%= f.input :description %>
+  <p>Show your latest posts on Instagram!</p>
+  <p>Your account needs to be public to share it on your profile.</p>
+  <%= f.simple_fields_for :user do |u|  %>
+    <%= u.input :username %>
+  <% end %>
   <%= f.input :location_specific %>
   <%= f.input :image, as: :file %>
   <%= f.submit %>

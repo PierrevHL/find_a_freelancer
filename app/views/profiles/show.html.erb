@@ -24,7 +24,7 @@
       <div class="d-flex justify-content-between">
         <h2><%= @profile.user.first_name.capitalize %></h2>
         <div class="d-flex justify-content-between">
-          <i class="far fa-heart"></i>
+          <i class="fas fa-heart"></i>
           <p><%= @profile.favoritors.count %></p>
         </div>
       </div>
@@ -42,7 +42,7 @@
       <% @profile.profile_skills.each do |profile_skill| %>
         <div class="d-flex justify-content-between">
           <p><%= profile_skill.skill.name %></p>
-          <p data-profile-skill="ps-<%= profile_skill.id %>" data-rate="<%= profile_skill.rate %>"><%= profile_skill.rate || 0 %><%= " $/hour" %></p>
+          <p data-profile-skill="ps-<%= profile_skill.id %>" data-rate="<%= profile_skill.rate %>"><%= profile_skill.rate || 0 %><%= " €/hour" %></p>
         </div>
       <% end %>
 
@@ -79,9 +79,11 @@
   </div>
 
   <div class="container">
-    <div id = "insta-feed">
+    <div class="row justify-content-around">
       <% @pictures.each do  |img_url| %>
-        <%= image_tag img_url %>
+        <div class="col-sm-4 justify-content-around">
+          <%= image_tag img_url, class:"instafeed" %>
+        </div>
       <% end %>
     </div>
   </div>
