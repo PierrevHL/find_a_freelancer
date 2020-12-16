@@ -50,7 +50,8 @@ class ProfilesController < ApplicationController
       data = JSON.parse(user_serialized)
       result_array = data["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"]
       @pictures = result_array.first(6).map { |res| res["node"]["display_url"] }
-    rescue
+    rescue => e
+      puts e
       @pictures = []
     end
   end
