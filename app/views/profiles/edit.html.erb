@@ -6,6 +6,10 @@
               autofocus: true %>
   <%= f.input :location %>
   <%= f.input :description %>
+  <p>Instagram account</p>
+  <%= f.simple_fields_for :user do |u|  %>
+    <%= u.input :username, input_html: {value: @profile.user.username} %>
+  <% end %>
   <%= f.input :location_specific %>
   <br>
   <%= f.input :image, as: :file %>
