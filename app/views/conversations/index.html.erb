@@ -9,7 +9,7 @@
               <div>
                 <% if conversation.messages.last.user.image.attached? %>
                   <%= cl_image_tag conversation.messages.last.user.image.key, class: "avatar avatar-msg" %>
-                <% elsif conversation.messages.last.user.profile.image.attached? %>
+                <% elsif conversation.messages.last.user.profile && conversation.messages.last.user.profile.image.attached? %>
                   <%= cl_image_tag conversation.messages.last.user.profile.image.key, class: "avatar avatar-msg" %>
                 <% else %>
                   <img class="avatar avatar-msg" src="https://source.unsplash.com/800x600/?worker" alt="">
