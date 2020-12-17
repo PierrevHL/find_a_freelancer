@@ -16,7 +16,7 @@ const iniTotalPrice = () => {
         const profileSkillId = skillElement.value
         const rateNode = document.querySelector(`[data-profile-skill='ps-${profileSkillId}']`);
         const rate = parseInt(rateNode.dataset.rate, 10);
-        priceNode.innerText = `Total price: ${numOfDays * rate}€`
+        priceNode.innerText = `Total price: ${numOfDays * rate * 8}€`
       }
     })
   }

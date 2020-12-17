@@ -29,7 +29,7 @@ const addMarkersToMap = (map, markers) => {
 
     const element = document.createElement('div');
     element.className = 'marker';
-    element.style.backgroundImage = `url('https://res.cloudinary.com/dxibxwttg/image/upload/v1606978638/marcador-de-posicion_sfdsgi.svg')`;
+    element.style.backgroundImage = `url('https://res.cloudinary.com/dxibxwttg/image/upload/v1608185145/sitio_upw8g6.png')`;
     element.style.backgroundSize = 'contain';
     element.style.width = '25px';
     element.style.height = '25px';
