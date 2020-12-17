@@ -12,15 +12,15 @@
     <div class="container">
 
     <p>
-      <a class="btn btn-primary" data-toggle="collapse" href="#userBookings" role="button" aria-expanded="false" aria-controls="userBookings">
+      <a class="btn btn-primary btn-shadow" data-toggle="collapse" href="#userBookings" role="button" aria-expanded="false" aria-controls="userBookings">
         <i class="fas fa-sliders-h"></i>
       </a>
     </p>
     <div class="collapse" id="userBookings">
-      <%= link_to 'All', dashboard_path, class:"btn btn-primary d-block w-100 filter-btn" %>
-      <%= link_to 'Pending', dashboard_path(type: "user", status: "pending"), class:"btn btn-primary d-block w-100 filter-btn" %>
-      <%= link_to 'Upcoming', dashboard_path(type: "user", status: "confirmed"), class:"btn btn-primary d-block w-100 filter-btn" %>
-      <%= link_to 'Completed', dashboard_path(type: "user", status: "completed"), class:"btn btn-primary d-block w-100 filter-btn" %>
+      <%= link_to 'All', dashboard_path, class:"btn btn-primary d-block w-100 filter-btn btn-shadow" %>
+      <%= link_to 'Pending', dashboard_path(type: "user", status: "pending"), class:"btn btn-primary d-block w-100 filter-btn btn-shadow" %>
+      <%= link_to 'Upcoming', dashboard_path(type: "user", status: "confirmed"), class:"btn btn-primary d-block w-100 filter-btn btn-shadow" %>
+      <%= link_to 'Completed', dashboard_path(type: "user", status: "completed"), class:"btn btn-primary d-block w-100 filter-btn btn-shadow" %>
     </div>
 
       <% @bookings.each do |booking| %>
@@ -64,15 +64,15 @@
     <div class="container">
 
     <p>
-      <a class="btn btn-primary" data-toggle="collapse" href="#freelancerBookings" role="button" aria-expanded="false" aria-controls="freelancerBookings">
+      <a class="btn btn-primary btn-shadow" data-toggle="collapse" href="#freelancerBookings" role="button" aria-expanded="false" aria-controls="freelancerBookings">
         <i class="fas fa-sliders-h"></i>
       </a>
     </p>
     <div class="collapse" id="freelancerBookings">
-      <%= link_to 'All', dashboard_path, class:"btn btn-primary d-block w-100 filter-btn" %>
-      <%= link_to 'Pending', dashboard_path(type: "freelancer", status: "pending"), class:"btn btn-primary d-block w-100 filter-btn" %>
-      <%= link_to 'Upcoming', dashboard_path(type: "freelancer", status: "confirmed"), class:"btn btn-primary d-block w-100 filter-btn" %>
-      <%= link_to 'Completed', dashboard_path(type: "freelancer", status: "completed"), class:"btn btn-primary d-block w-100 filter-btn" %>
+      <%= link_to 'All', dashboard_path, class:"btn btn-primary d-block w-100 filter-btn btn-shadow" %>
+      <%= link_to 'Pending', dashboard_path(type: "freelancer", status: "pending"), class:"btn btn-primary d-block w-100 filter-btn btn-shadow" %>
+      <%= link_to 'Upcoming', dashboard_path(type: "freelancer", status: "confirmed"), class:"btn btn-primary d-block w-100 filter-btn btn-shadow" %>
+      <%= link_to 'Completed', dashboard_path(type: "freelancer", status: "completed"), class:"btn btn-primary d-block w-100 filter-btn btn-shadow" %>
     </div>
 
       <% @freelancer_bookings.each do |booking| %>
