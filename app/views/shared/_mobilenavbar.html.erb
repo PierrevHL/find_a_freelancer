@@ -1,24 +1,24 @@
 <nav class="navbar navbar-dark bg-white navbar-expand d-md-none d-lg-none d-xl-none fixed-bottom background-color: #white !important">
     <ul class="navbar-nav nav-justified w-100 justify-content-between">
-    <%= link_to root_path, class:"navbar-link #{'active' if  controller_name == 'pages' && action_name == 'home'}" do %>
+    <%= link_to root_path, class:"navbar-link #{'font-weight-bold active' if  controller_name == 'pages' && action_name == 'home'}" do %>
       <li class="nav-item d-flex flex-column">
         <i class="fas fa-search"></i>
         <span>Explore</span>
       </li>
     <% end %>
-    <%= link_to saved_path, class:"navbar-link #{'active' if action_name == 'saved'}" do %>
+    <%= link_to saved_path, class:"navbar-link #{'font-weight-bold active' if action_name == 'saved'}" do %>
       <li class="nav-item d-flex flex-column">
         <i class="far fa-heart m-0"></i>
         <span>Saved</span>
       </li>
     <% end %>
-    <%= link_to dashboard_path, class:"navbar-link #{'active' if action_name == 'dashboard'}" do %>
+    <%= link_to dashboard_path, class:"navbar-link #{'font-weight-bold active' if action_name == 'dashboard'}" do %>
       <li class="nav-item d-flex flex-column">
         <i class="far fa-handshake"></i>
         <span>Bookings</span>
       </li>
     <% end %>
-    <%= link_to conversations_path, class:"navbar-link #{'active' if action_name == 'index' && controller_name == "conversations"}" do %>
+    <%= link_to conversations_path, class:"navbar-link #{'font-weight-bold active' if action_name == 'index' && controller_name == "conversations"}" do %>
       <li class="nav-item d-flex flex-column">
         <i class="far fa-comment-alt"></i>
         <span>Inbox</span>
@@ -27,14 +27,14 @@
 
     <% if user_signed_in? %>
       <% if current_user.profile %>
-        <%= link_to profile_path(current_user.profile, h:true), class:"navbar-link #{'active' if action_name == 'show' && controller_name == "profiles"}" do %>
+        <%= link_to profile_path(current_user.profile, h:true), class:"navbar-link #{'font-weight-bold active' if action_name == 'show' && controller_name == "profiles"}" do %>
           <li class="nav-item d-flex flex-column">
             <i class="far fa-user"></i>
             <span>Profile</span>
           </li>
         <% end %>
       <% else %>
-        <%= link_to user_path(current_user), class:"navbar-link #{'active' if action_name == 'show' && controller_name == "users"}" do %>
+        <%= link_to user_path(current_user), class:"navbar-link #{'font-weight-bold active' if action_name == 'show' && controller_name == "users"}" do %>
           <li class="nav-item d-flex flex-column">
             <i class="far fa-user"></i>
             <span>Profile</span>
@@ -42,7 +42,7 @@
         <% end %>
       <% end %>
     <% else %>
-      <%= link_to new_user_session_path, class:"navbar-link #{'active' if action_name == "new" && controller_name == "sessions"}" do %>
+      <%= link_to new_user_session_path, class:"navbar-link #{'font-weight-bold active' if action_name == "new" && controller_name == "sessions"}" do %>
         <li class="nav-item d-flex flex-column">
           <i class="far fa-user"></i>
           <span>Log in</span>

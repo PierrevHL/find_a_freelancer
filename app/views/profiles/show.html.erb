@@ -1,19 +1,7 @@
 <br>
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
-      <div class="d-flex justify-content-between">
-        <div class="d-flex align-items-start flex-column">
-          <h2><%= @profile.user.first_name.capitalize %></h2>
-          <p><%= @profile.location %></p>
-        </div>
-        <div class="d-flex justify-content-between">
-          <i class="fas fa-heart"></i>
-          <p><%= @profile.favoritors.count %></p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
+    <div class="col-md-4 mb-3 ">
       <div class="profile-img btn-shadow" style="background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2)), url('<%= @profile.image.attached? ? cl_image_path(@profile.image.key, height: 275, width: 400, crop: :fill)  : 'https://source.unsplash.com/800x600'%>')">
         <% if !user_signed_in? %>
           <%= link_to login_path, method: :post do  %>
@@ -32,45 +20,71 @@
     </div>
 
     <div class="col-md-4">
-      <div class="rating-location">
-        <div class="d-flex justify-content-start">
-          <i class="fas fa-star"></i>
-          <p class="rating"><%= @profile.rating %></p>
-          <p><%= "(" %><%= @profile.freelancer_reviews.count %><%= ")" %></p>
+      <div class="d-flex justify-content-between align-items-center my-4">
+        <div class="d-flex align-items-start flex-column">
+          <h2 class="mb-0"><%= @profile.user.first_name.capitalize %></h2>
+          <p class="mb-0"><%= @profile.location.capitalize %></p>
+        </div>
+        <div class="d-flex justify-content-end align-items-center">
+          <div class="d-flex justify-content-between mr-2">
+            <i class="fas fa-star"></i>
+            <p class="rating mb-0"><%= @profile.rating %></p>
+            <p class="mb-0">(<%= @profile.freelancer_reviews.count %>)</p>
+          </div>
+          <div class="d-flex justify-content-between">
+            <i class="fas fa-heart"></i>
+            <p class="mb-0">(<%= @profile.favoritors.count %>)</p>
+          </div>
         </div>
       </div>
-      <br>
-      <h4><%= @profile.description %></h4>
-      <div class="skills-card">
-        <% @profile.profile_skills.each do |profile_skill| %>
-          <div class="d-flex justify-content-between">
-            <p><%= profile_skill.skill.name %></p>
-            <p data-profile-skill="ps-<%= profile_skill.id %>" data-rate="<%= profile_skill.rate %>"><%= profile_skill.rate || 0 %><%= " €/hour" %></p>
+      <div>
+        <div class="skills-card mb-4">
+          <% @profile.profile_skills.each do |profile_skill| %>
+            <div class="d-flex justify-content-between">
+              <p><%= profile_skill.skill.name %></p>
+              <p data-profile-skill="ps-<%= profile_skill.id %>" data-rate="<%= profile_skill.rate %>"><%= profile_skill.rate || 0 %><%= " €/hour" %></p>
+            </div>
+          <% end %>
+          <div class="d-flex justify-content-end border-top-2 pt-4">
+            <div class="item">
+              <% if user_signed_in? && @profile.user != current_user %>
+                <%= link_to 'Contact', conversations_path(sender_id: current_user.id, receiver_id: @profile.user.id), method: 'post', class:"btn btn-primary" %>
+              <% else %>
+                <%= link_to 'Contact', conversations_path, class:"btn btn-primary" %>
+              <% end %>
+            </div>
           </div>
-        <% end %>
+          
+        </div>
       </div>
     </div>
 
-    <div class="col-md-4">
-      <div class="d-flex justify-content-around mx-5 px-5">
+    <div class="col-md-4 px-0 py-4 border-top-2 border-bottom-2 mx-3">
+      <% if @profile.description.capitalize.length > 100 %>
+        <p>
+          <%= @profile.description.capitalize.split(' ')[0..30].join(' ') %><span id="dots">...</span>
+          <span id="more" class="d-none"><%= @profile.description.split(' ')[31..-1].join(' ') %></span>
+        </span>
+        <button class="btn btn-float d-block" id="seeMoreBtn">See more</button>
+      <% else %>
+        <p><%= @profile.description.capitalize.truncate(100) %></p>
+      <% end %>
+    </div>
 
-        <div id='profile-booking-dates'  data-unavailable="<%= @profile.unavailable_dates.to_json %>">
+    <div class="col-md-4">
+      <div class="d-flex justify-content-around mt-4">
+
+        <div id='profile-booking-dates' class="w-80"  data-unavailable="<%= @profile.unavailable_dates.to_json %>">
           <% if (@profile.user != current_user) %>
-            <div class="item">
-            <% if user_signed_in? %>
-              <%= link_to 'Send a message', conversations_path(sender_id: current_user.id, receiver_id: @profile.user.id), method: 'post', class:"btn btn-primary" %>
-            <% else %>
-              <%= link_to 'Send a message', conversations_path, class:"btn btn-primary" %>
-            <% end %>
-            </div>
-            <%= simple_form_for [@booking] do |f| %>
+            <%= simple_form_for [@booking], html: { class: "w-100" } do |f| %>
               <%= f.hidden_field :profile_id, value: @profile.id %>
               <%= f.input :profile_skill, label: "Book #{@profile.user.first_name} as:", collection: @profile.profile_skills.map {|profile_skill| [profile_skill.skill.name, profile_skill.id] }, input_html: {value: session[:profile_skill]}, required: true %>
-              <%= f.input :start_date,as: :date, html5: true, input_html: {value: session[:start_date]} %>
-              <%= f.input :end_date, html5: true, input_html: {value: session[:end_date]} %>
-              <button class="btn btn-primary" type="submit">
-                <i class='far fa-credit-card'></i> Book
-              </button>
+              <%= f.input :start_date, as: :date, html5: true, input_html: {value: session[:start_date]}, label: "Add dates" %>
+              <div class="d-flex justify-content-end">
+                <button class="btn btn-primary" type="submit">
+                  <i class='far fa-credit-card'></i> Book
+                </button>
+              </div>
             <% end %>
             <p id="live-price" class="my-4"></p>
           <% end %>

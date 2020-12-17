@@ -28,6 +28,9 @@
 a.navbar-link {
   color: $dark-green;
   text-decoration: none;
+  span {
+    font-size: 12px;
+  }
 
   &:active {
     background-color: rgb(194, 187, 187);
