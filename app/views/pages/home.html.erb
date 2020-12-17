@@ -17,34 +17,47 @@
   </div>
 </div>
 
+
+
+
+
 <div class="container-teasers">
+
+
+
   <h3>Find what you are looking for: </h3>
-  <div class="row">
+  <div class="d-flex w-100" style="overflow-x: scroll">
     <div class="col">
       <div class="teaser-card">
-        <%= link_to profiles_path(skill: "ux designer") do %>
-          <%= image_tag "designer.jpg" %>
-          <p class="teaser-card-text">Eye-catching logos</p>
+        <%= link_to profiles_path(skill: "ux designer"), class: "p-0" do %>
+          <div style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('<%= image_path "designer.jpg" %>')">
+            <p class="teaser-card-text">Eye-catching logos</p>
+          </div>
         <% end %>
       </div>
     </div>
     <div class="col">
       <div class="teaser-card">
-        <%= link_to profiles_path(skill: "gardener") do %>
-          <%= image_tag "florist.jpg" %>
-          <p class="teaser-card-text">Event decoration</p>
+        <%= link_to profiles_path(skill: "gardener"), class: "p-0" do %>
+          <div style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('<%= image_path "florist.jpg" %>')">
+            <p class="teaser-card-text">Event decoration</p>
+          </div>
         <% end %>
       </div>
     </div>
     <div class="col">
       <div class="teaser-card">
-        <%= link_to profiles_path(skill: "cook") do %>
-          <%= image_tag "caterer.jpg" %>
-          <p class="teaser-card-text">Delicious catering</p>
+        <%= link_to profiles_path(skill: "cook"), class: "p-0" do%>
+          <div style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('<%= image_path "caterer.jpg" %>')">
+            <p class="teaser-card-text">Delicious catering</p>
+          </div>
         <% end %>
       </div>
     </div>
   </div>
+
+
+
 </div>
 
 
