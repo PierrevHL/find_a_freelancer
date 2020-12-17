@@ -56,3 +56,16 @@ button#home-search {
 .container-home {
   margin-top: 50px;
 }
+
+div.teaser-card {
+  position: relative;
+  p.teaser-card-text {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    font-style: bold;
+    color: white;
+    padding: 4px;
+    font-size: 20px;
+  }
+}

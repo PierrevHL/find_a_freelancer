@@ -16,7 +16,7 @@ Profile.destroy_all
 User.destroy_all
 
 puts "Database cleaned"
-skill = ["Photographer", "Programmer", "UX designer", "Cleaner", "Plumber", "Electrical technician", "Tutor", "Translator", "Driver", "Gardener", "Model", "Writer", "Editor", "Bookkeeper", "Coach", "Cook", "Graphic designer", "Personal trainer", "Virtual assistant", "Courier", "Musician"]
+skill = ["Photographer", "Programmer", "UX designer", "Cleaner", "Plumber", "Electrical technician", "Tutor", "Translator", "Driver", "Gardener", "Model", "Writer", "Editor", "Bookkeeper", "Coach", "Cook", "Graphic designer", "Personal trainer", "Virtual assistant", "Courier", "Musician", "Social media manager"]
 
 skill.each {|skill| Skill.create(name: skill)}
 
