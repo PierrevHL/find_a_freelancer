@@ -55,3 +55,13 @@ img.instafeed {
 p.review-text{
   margin-bottom: 0.5rem !important;
 }
+
+p.rate-range{
+  color: $spanish-grey;
+  border-radius: 16px;
+  border: $dark-green 1px solid;
+  padding: 4px 8px;
+  width: fit-content;
+  font-size: 14px;
+}
+
