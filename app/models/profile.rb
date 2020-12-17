@@ -25,10 +25,10 @@ class Profile < ApplicationRecord
   end
 
   def min_rate
-    profile_skills.minimum(:rate_cents)
+    profile_skills.minimum(:rate_cents) / 100
   end
 
   def max_rate
-    profile_skills.maximum(:rate_cents)
+    profile_skills.maximum(:rate_cents) / 100
   end
 end
