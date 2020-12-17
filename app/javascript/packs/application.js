@@ -35,6 +35,7 @@ import { initStarRating } from '../plugins/init_star_rating';
 import { profileLinks } from '../dom/profile_link';
 import { profileImgLink } from '../dom/profile_img_link';
 import { initInstagramFeed } from '../dom/init_instagram_feed';
+import { seeMoreText } from '../dom/see_more';
 
 
 document.addEventListener('turbolinks:load', () => {
@@ -45,5 +46,6 @@ document.addEventListener('turbolinks:load', () => {
   iniTotalPrice();
   profileLinks();
   profileImgLink();
-  initInstagramFeed()
+  initInstagramFeed();
+  seeMoreText();
 })
