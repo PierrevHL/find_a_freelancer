@@ -23,4 +23,12 @@ class Profile < ApplicationRecord
   def update_user
     self.user.update(freelancer: true)
   end
+
+  def min_rate
+    profile_skills.minimum(:rate_cents)
+  end
+
+  def max_rate
+    profile_skills.maximum(:rate_cents)
+  end
 end
