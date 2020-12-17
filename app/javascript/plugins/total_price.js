@@ -30,7 +30,7 @@ const iniTotalPrice = () => {
 
 
       const price = ((endDateInteger - startDateInteger) / (1000 * 60 * 60 * 24)) * parseInt(rateNode.dataset.rate, 10)
-      priceNode.innerText = `Total price: ${price}$`
+      priceNode.innerText = `Total price: ${price * 8}€`
     })
   }
 
@@ -40,9 +40,7 @@ const iniTotalPrice = () => {
       endDateInput.value = ""
       priceNode.innerText = "Total price: 0€"
     })
-
   }
-
 }
 
 export { iniTotalPrice }
