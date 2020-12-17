@@ -54,7 +54,7 @@
               <% end %>
             </div>
           </div>
-          
+
         </div>
       </div>
     </div>
@@ -62,8 +62,8 @@
     <div class="col-md-4 px-0 py-4 border-top-2 border-bottom-2 mx-3">
       <% if @profile.description.length > 100 %>
         <p>
-          <%= @profile.description.split(' ')[0..30].join(' ') %><span id="dots">...</span>
-          <span id="more" class="d-none"><%= @profile.description.split(' ')[31..-1].join(' ') %></span>
+          <%= @profile.description.split(' ')[0..30]&.join(' ') %><span id="dots">...</span>
+          <span id="more" class="d-none"><%= @profile.description.split(' ')[31..-1]&.join(' ') %></span>
         </span>
         <button class="btn btn-float d-block" id="seeMoreBtn">See more</button>
       <% else %>
