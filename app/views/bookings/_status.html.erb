@@ -32,10 +32,10 @@
           <% if booking.status == "confirmed" && current_user == booking.profile_skill.profile.user %>
             <p><strong>Congrats!</strong> <%= booking.user.first_name %> is expecting you from <%= booking.start_date.strftime("%A, %b %d") %> - <%= booking.end_date.strftime("%A, %b %d") %>! :)</p>
             <p>Go ahead and get in touch with <%= booking.user.first_name %> via mail or WhatsApp or just send him a message here directly!</p>
-            <br> 
+            <br>
             <div class="d-flex flex-column">
               <%= mail_to booking.user.email, booking.user.email, subject: "FaF - #{booking.profile.user.first_name} - #{booking.profile_skill.skill.name}", body: "#{client_message(booking)}" %>
-              <br> 
+              <br>
               <%= link_to "https://wa.me/#{booking.user.phone_number}?text=#{client_message(booking)}", class: "text-decoration-none" do %>
                 <i class="fab fa-whatsapp"></i>  WhatsApp
               <% end %>
@@ -43,11 +43,11 @@
           <% else %>
             <p><strong>Congrats!</strong> <%= booking.profile.user.first_name %> will be there for you from <%= booking.start_date.strftime("%A, %b %d") %> - <%= booking.end_date.strftime("%A, %b %d") %>! :)</p>
             <p>Go ahead and get in touch with <%= booking.profile.user.first_name %> via mail or WhatsApp or just send him a message here directly!</p>
-            <br> 
+            <br>
             <div class="d-flex flex-column">
               <%= mail_to booking.profile_skill.profile.user.email, booking.profile_skill.profile.user.email, subject: "FaF - #{booking.profile.user.first_name} - #{booking.profile_skill.skill.name}", body: "#{freelancer_message(booking)}" %>
               <br>
-              <%= link_to "https://wa.me/#{booking.user.phone_number}?text=#{freelancer_message(booking)}", class: "text-decoration-none" do %>
+              <%= link_to "https://wa.me/#{booking.profile_skill.profile.user.phone_number}?text=#{freelancer_message(booking)}", class: "text-decoration-none" do %>
                 <i class="fab fa-whatsapp"></i>  WhatsApp
               <% end %>
             </div>
