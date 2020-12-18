@@ -27,7 +27,7 @@
         <div class="list_card mb-4">
           <%= link_to profile_path(booking.profile_skill.profile), class: "profile-link" do %>
             <% if booking.profile.image.attached? %>
-              <div class="h-100 list_card-bg" style="background-image: url('<%= booking.profile.image.key %>'); ">
+#               <div class="h-100 list_card-bg" style="background-image: url('<%= cl_image_path booking.profile.image.key %>'); ">
                 <% if booking.status == "completed" && !booking.freelancer_review %>
                   <button class="btn btn-primary review-link" data-url="<%= new_booking_freelancer_review_path(booking) %>">Add a review</button>
                 <% end %>
@@ -79,7 +79,7 @@
         <div class="list_card mb-4">
         <%= link_to (booking.user.profile ? profile_path(booking.user.profile) : user_path(booking.user)), class: "profile-link" do %>
           <% if booking.user.image.attached? %>
-            <div class="h-100 list_card-bg" style="background-image: url('<%= booking.user.image.key %>'); ">
+            <div class="h-100 list_card-bg" style="background-image: url('<%= cl_image_path booking.user.image.key %>'); ">
               <% if booking.status == "completed" && !booking.user_review %>
                 <button class="btn btn-primary review-link" data-url="<%= new_booking_user_review_path(booking) %>">Add a review</button>
               <% end %>
