@@ -12,11 +12,16 @@ const iniTotalPrice = () => {
         const dates = e.target.value.split(' to ').map(date => date.split('-'));
         const startDate = new Date(dates[0][0], parseInt(dates[0][1], 10) - 1, dates[0][2]);
         const endDate = new Date(dates[1][0], parseInt(dates[1][1], 10) - 1, dates[1][2]);
-        const numOfDays = (endDate - startDate) / (1000 * 60 * 60 * 24);
+        const numOfDays = (endDate - startDate) / (1000 * 60 * 60 * 24) + 1;
         const profileSkillId = skillElement.value
         const rateNode = document.querySelector(`[data-profile-skill='ps-${profileSkillId}']`);
         const rate = parseInt(rateNode.dataset.rate, 10);
         priceNode.innerText = `Total price: ${numOfDays * rate * 8}€`
+      } else {
+        const profileSkillId = skillElement.value
+        const rateNode = document.querySelector(`[data-profile-skill='ps-${profileSkillId}']`);
+        const rate = parseInt(rateNode.dataset.rate, 10);
+        priceNode.innerText = `Total price: ${rate * 8}€`
       }
     })
   }

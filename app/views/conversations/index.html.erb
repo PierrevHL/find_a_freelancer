@@ -7,17 +7,17 @@
           <a href= "<%= conversation_messages_path(conversation) %>" class="custom-card d-block mx-3">
             <div class="conv-card">
               <div>
-                <% if conversation.messages.last.user.image.attached? %>
-                  <%= cl_image_tag conversation.messages.last.user.image.key, class: "avatar avatar-msg" %>
-                <% elsif conversation.messages.last.user.profile && conversation.messages.last.user.profile.image.attached? %>
-                  <%= cl_image_tag conversation.messages.last.user.profile.image.key, class: "avatar avatar-msg" %>
+                <% if conversation.contact_user(current_user).image.attached? %>
+                  <%= cl_image_tag conversation.contact_user(current_user).image.key, class: "avatar avatar-msg" %>
+                <% elsif conversation.contact_user(current_user)&.profile&.image&.attached?%>
+                  <%= cl_image_tag conversation.contact_user(current_user)&.profile.image.key, class: "avatar avatar-msg" %>
                 <% else %>
                   <img class="avatar avatar-msg" src="https://source.unsplash.com/800x600/?worker" alt="">
                 <% end %>
               </div>
               <div class="d-flex flex-column w-100 ml-2">
-                <span><strong><%= conversation.messages.last.user.first_name %><%= " " %></strong></span>
-                <span> <%= conversation.messages.last.content.truncate(35) %></span>
+                <span><strong><%= conversation.contact_user(current_user).first_name %><%= " " %></strong></span>
+                <span>  <%= "You: " if conversation.messages.last.user == current_user %> <%= conversation.messages.last.content.truncate(35) %></span>
                 <span class="card-date text-right"><%= conversation.messages.last.created_at.strftime("%A, %b %d") %></span>
               </div>
             </div>
