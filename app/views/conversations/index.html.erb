@@ -8,9 +8,9 @@
             <div class="conv-card">
               <div>
                 <% if conversation.contact_user(current_user).image.attached? %>
-                  <%= cl_image_tag conversation.contact_user(current_user).image.key, class: "avatar avatar-msg" %>
-                <% elsif conversation.contact_user(current_user)&.profile&.image&.attached?%>
                   <%= cl_image_tag conversation.contact_user(current_user)&.profile.image.key, class: "avatar avatar-msg" %>
+                <% elsif conversation.contact_user(current_user)&.profile&.image&.attached?%>
+                  <%= cl_image_tag conversation.contact_user(current_user).image.key, class: "avatar avatar-msg" %>
                 <% else %>
                   <img class="avatar avatar-msg" src="https://source.unsplash.com/800x600/?worker" alt="">
                 <% end %>
