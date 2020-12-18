@@ -2,8 +2,10 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new
     dates = params[:booking][:start_date].split(' to ')
-    @booking.start_date = dates[0].to_date
-    @booking.end_date = dates[1] ? dates[1].to_date : dates[0].to_date
+    unless dates.empty?
+      @booking.start_date = dates[0].to_date
+      @booking.end_date = dates[1] ? dates[1].to_date : dates[0].to_date
+    end
     @user = current_user
     @booking.user = @user
     @profile_skill = params[:booking][:profile_skill].present? ? ProfileSkill.find(params[:booking][:profile_skill]) : nil

@@ -20,7 +20,12 @@ const initFlatpickr = () => {
       minDate: "today",
       disable: unavailableDates,
       dateFormat: "Y-m-d",
-      mode: "range"
+      mode: "range",
+      onClose: function(selectedDates, dateStr, instance) {
+        if(selectedDates.length == 1){
+            instance.setDate([selectedDates[0],selectedDates[0]], true);
+        }
+    }
     });
   }
   
